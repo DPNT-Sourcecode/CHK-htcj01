@@ -104,4 +104,3 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(280, checkout.checkout("EEEEEEEB"));
     }
 }
-

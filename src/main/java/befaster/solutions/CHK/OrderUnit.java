@@ -38,6 +38,8 @@ class OrderUnit {
         return computeTotal(this.matchedOffer);
     }
 
+    //TODO: Maybe is better to change and use the offer candidates only
+    //TODO: Maybe is the case of use recursivity here.
     public Integer computeTotal(Offer offer) {
         if (offer != null && offer.isDynamic()) {
             return offer.computeFinalPrice(new OfferContext(this, offer));
@@ -52,6 +54,9 @@ class OrderUnit {
             remainingQuantity = this.quantity % offer.getQuantity();
         }
 
+        //Based on the remainingQuantity, check if there are more offers to be applied
+
+
         Integer discount = 0;
          if (this.discounts != null) {
              discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
@@ -62,6 +67,22 @@ class OrderUnit {
             return totalWithDiscount < 0? 0 : totalWithDiscount;
          }
          return offerTotal + (remainingQuantity * price);
+    }
+
+    public Integer recursivelyComputeTotal() {
+        Integer fullTotal = this.quantity * this.getPrice();
+        Integer offerTotal = 0;
+        Integer timesAffected = 0;
+        Integer remainingQuantity = this.quantity;
+        if (offer != null) {
+            timesAffected = (this.quantity / offer.getQuantity());
+            offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
+            remainingQuantity = this.quantity % offer.getQuantity();
+        }
+    }
+
+    private Offer getOfferBasedOnQuantity(int quantity) {
+        return this.offerCandidates.stream().filter( offer -> offer.getQuantity() >= quantity).sorted((prev, curr) -> prev.getQuantity() - curr.getQuantity()).findFirst();
     }
 
     public void addDiscount(Discount discount){
@@ -84,6 +105,3 @@ class OrderUnit {
         return false;
     }
 }
-
-
-
