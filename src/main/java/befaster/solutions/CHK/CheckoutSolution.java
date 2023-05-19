@@ -91,7 +91,10 @@ public class CheckoutSolution {
         private final Map<String, OfferRule> rules = new HashMap<>();
         private final Integer finalPrice;
 
-        public Offer(OfferRule rule, Integer finalPrice) {
+        //Testing if is simple to directly set how many items are affected by this offer.
+        private final Integer quantity;
+
+        public Offer(OfferRule rule, Integer finalPrice, Integer quantity) {
             this(List.of(new OfferRule[]{rule}), finalPrice);
         }
 
@@ -194,5 +197,6 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
 
