@@ -1,2 +1,49 @@
-package befaster.solutions.CHK;public class Offer {
+package befaster.solutions.CHK;
+
+import java.util.function.Function;
+
+/**
+ * A class to represent an Offer
+ * <p>
+ * An Offer is composed by multiple OfferCondition,
+ * this way is possible to create an Offer able to match a bundle of different SKUs.
+ */
+class Offer {
+
+    private final String sku;
+    private final OfferRule rule;
+    private final Integer finalPrice;
+
+    private final Function<OrderUnit, Integer> dynamicPriceFN;
+
+    public Offer(String sku, OfferRule rule, Integer finalPrice) {
+        this.sku = sku;
+        this.rule = rule;
+        this.finalPrice = finalPrice;
+        this.dynamicPriceFN = null;
+    }
+
+    public Offer(String sku, OfferRule rule, Function<OrderUnit, Integer> dynamicPriceFN) {
+        this.sku = sku;
+        this.rule = rule;
+        this.dynamicPriceFN = dynamicPriceFN;
+        this.finalPrice = null;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public Integer getQuantity() {
+        return rule.getQuantity();
+    }
+
+    public Integer getFinalPrice() {
+        return finalPrice;
+    }
+
+    public Boolean isSatisfiedBy(OrderUnit unit) {
+        return this.rule.isSatisfiedBy(unit);
+    }
 }
+

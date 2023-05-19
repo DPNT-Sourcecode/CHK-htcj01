@@ -25,7 +25,8 @@ public class OfferRule {
      * @param unit
      * @return
      */
-    Boolean isSatisfiedBy(CheckoutSolution.OrderUnit unit) {
+    Boolean isSatisfiedBy(OrderUnit unit) {
         return unit.getQuantity() >= quantity;
     }
 }
+
