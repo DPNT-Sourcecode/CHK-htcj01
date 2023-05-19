@@ -72,6 +72,7 @@ class OrderUnit {
 
     public Integer recursivelyComputeTotal(int quantity) {
         Offer offer = getOfferBasedOnQuantity(quantity);
+        if (offer == null) return 0;
         Integer fullTotal = quantity * this.getPrice();
         Integer offerTotal = 0;
         Integer timesAffected = 0;
@@ -85,7 +86,10 @@ class OrderUnit {
     }
 
     private Offer getOfferBasedOnQuantity(int quantity) {
-        return this.offerCandidates.stream().filter( offer -> offer.getQuantity() >= quantity).sorted((prev, curr) -> prev.getQuantity() - curr.getQuantity()).findFirst().orElse(null);
+        return this.offerCandidates
+                        .stream()
+                        .filter( offer -> offer.getQuantity() <= quantity)
+                        .sorted((prev, curr) -> prev.getQuantity() - curr.getQuantity()).findFirst().orElse(null);
     }
 
     public void addDiscount(Discount discount){
