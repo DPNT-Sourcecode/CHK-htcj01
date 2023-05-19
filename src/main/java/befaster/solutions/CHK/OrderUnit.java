@@ -43,7 +43,7 @@ class OrderUnit {
         }
 
         if (discounts.size() > 0 && discount <= computedTotal) {
-            Integer totalWithDiscount = (this.quantity * this.price) + discount;
+            Integer totalWithDiscount = computedTotal + discount;
             return totalWithDiscount < 0? 0 : totalWithDiscount;
         }
         return computedTotal;
@@ -122,3 +122,4 @@ class OrderUnit {
         return false;
     }
 }
+
