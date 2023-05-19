@@ -137,7 +137,8 @@ public class CheckoutSolution {
 
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
-        skus.toCharArray();
+        char[] chars = skus.toCharArray();
+        List<char[]> asList = Arrays.asList(chars);
         List<String> skusList = List.of(skus.toCharArray()).stream().map(letter -> Character.toString(letter)) ;
         if (!isAllSkuValid(skusList)) return -1;
         Map<String, OrderUnit>  orderUnits = parseSKUs(skusList);
@@ -178,6 +179,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
