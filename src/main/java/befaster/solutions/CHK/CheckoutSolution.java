@@ -20,6 +20,7 @@ public class CheckoutSolution {
         prices.put("C", 20);
         prices.put("D", 15);
         prices.put("E", 40);
+        prices.put("F", 10);
 
         //This won't work. It should have the B free
         Function<OfferContext, Integer> dynanmicPrice = (ctx) -> {
@@ -47,7 +48,7 @@ public class CheckoutSolution {
         offers.add(new Offer("A", new OfferRule("A", 5), 200, null));
         offers.add(new Offer("B", new OfferRule("B", 2), 45, null));
         offers.add(new Offer("E", new OfferRule("B", 2), 80, discountFN));
-        offers.add(new Offer("F", new OfferRule("F", 2), dynanmicPrice , null));
+        offers.add(new Offer("F", new OfferRule("F", 3), dynanmicPrice , null));
     }
 
     public Integer checkout(String skus) {
