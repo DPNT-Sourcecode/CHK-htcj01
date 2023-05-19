@@ -136,14 +136,15 @@ public class CheckoutSolution {
 
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
-        Map<String, OrderUnit>  orderUnits = parseSKUs(skus);
+        String[] skusList = skus.split(",");
+        prices.values().inter
+        Map<String, OrderUnit>  orderUnits = parseSKUs(List.of(skusList));
         assignOffers(orderUnits);
         return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
     }
 
-    public static Map<String, OrderUnit> parseSKUs(String skus) {
-        Map<String, List<String>> parsedSKus = Arrays
-                                                .asList(skus.split(","))
+    public static Map<String, OrderUnit> parseSKUs(List<String> skus) {
+        Map<String, List<String>> parsedSKus = skus
                                                     .stream()
                                                     .collect(Collectors.groupingBy(item -> item));
 
@@ -163,6 +164,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
