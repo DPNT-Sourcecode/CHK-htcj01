@@ -29,4 +29,3 @@ public class OfferRule {
         return unit.getQuantity() >= quantity;
     }
 }
-

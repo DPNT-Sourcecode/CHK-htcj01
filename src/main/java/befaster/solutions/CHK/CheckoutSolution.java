@@ -39,7 +39,8 @@ public class CheckoutSolution {
         offers.add(new Offer("B", new OfferRule("B", 2), 45));
 
         //How to give the discount in the next? Maybe allow to declare a lambda and invoke the Offer with the Unit
-        Function<OrderUnit, Integer> dynamicPriceFn = (unit) -> {
+        Function<OfferContext, Integer> dynamicPriceFn = (ctx) -> {
+
             return 0;
         };
         offers.add(new Offer("E", new OfferRule("B", 3), dynamicPriceFn));
@@ -88,7 +89,3 @@ public class CheckoutSolution {
         });
     }
 }
-
-
-
-

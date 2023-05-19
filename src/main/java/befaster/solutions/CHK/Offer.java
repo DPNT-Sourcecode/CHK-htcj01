@@ -14,7 +14,7 @@ class Offer {
     private final OfferRule rule;
     private final Integer finalPrice;
 
-    private final Function<OrderUnit, Integer> dynamicPriceFN;
+    private final Function<OfferContext, Integer> dynamicPriceFN;
 
     public Offer(String sku, OfferRule rule, Integer finalPrice) {
         this.sku = sku;
@@ -23,7 +23,7 @@ class Offer {
         this.dynamicPriceFN = null;
     }
 
-    public Offer(String sku, OfferRule rule, Function<OrderUnit, Integer> dynamicPriceFN) {
+    public Offer(String sku, OfferRule rule, Function<OfferContext, Integer> dynamicPriceFN) {
         this.sku = sku;
         this.rule = rule;
         this.dynamicPriceFN = dynamicPriceFN;
@@ -46,4 +46,3 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
-
