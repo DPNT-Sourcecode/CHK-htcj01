@@ -3,6 +3,7 @@ package befaster.solutions.CHK;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,15 +57,15 @@ class CheckoutSolutionTest {
 
     @Test
     public void shouldTransformSkusToOrderUnits() {
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A").size(), 1);
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").size(), 1);
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A,B").size(), 2);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("A")).size(), 1);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("A","A")).size(), 1);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("A","A","B")).size(), 2);
 
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A").get("A").getQuantity(), 1);
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").get("A").getQuantity(), 2);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("A")).get("A").getQuantity(), 1);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("A","A")).get("A").getQuantity(), 2);
 
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").get("A").getTotal(), 100);
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("B").get("B").getTotal(), 30);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("A","A")).get("A").getTotal(), 100);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("B")).get("B").getTotal(), 30);
     }
 
 }
