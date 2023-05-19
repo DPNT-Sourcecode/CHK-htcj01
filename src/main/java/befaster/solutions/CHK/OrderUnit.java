@@ -55,7 +55,7 @@ class OrderUnit {
              discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
          }
 
-        Integer bestTotal = discounts.size() > 0 && offerTotal <= discount? offerTotal : discount;
+        Integer bestTotal = discounts.size() > 0 && discount <= offerTotal? discount : offerTotal;
         return bestTotal + (remainingQuantity * price) - discount;
     }
 
@@ -78,5 +78,3 @@ class OrderUnit {
         return false;
     }
 }
-
-

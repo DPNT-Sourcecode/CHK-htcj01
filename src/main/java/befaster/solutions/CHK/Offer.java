@@ -63,6 +63,3 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
-
-
-
