@@ -20,7 +20,10 @@ public class CheckoutSolution {
 
         boolean isSatisfiedBy(List<String> skuIds){
             Map<String, List<String>> map = skuIds.stream().collect(Collectors.groupingBy((item) -> item));
-            return false;
+            //TODO:
+            //What can happen if I have multiple items that can match with the same offer twice?
+            //Do I have to implement a method to calculate the price?
+            return map.getOrDefault(sku, new ArrayList<>()).size() >= quantity;
         }
     }
 
