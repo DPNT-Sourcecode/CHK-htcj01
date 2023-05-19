@@ -36,8 +36,13 @@ public class CheckoutSolution {
         }
 
         public Integer getTotal() {
-            Integer offerTotal = this.matchedOffer != null? this.matchedOffer.finalPrice : 0;
-            return offerTotal + (matchedOffer.quantity - quantity * price);
+            Integer offerTotal = 0;
+            Integer offerAffected = 0;
+            if (this.matchedOffer != null ) {
+                offerTotal = this.matchedOffer != null? this.matchedOffer.finalPrice : 0;
+                offerAffected = this.matchedOffer.quantity;
+            }
+            return offerTotal + ((quantity - offerAffected) * price);
         }
     }
 
@@ -200,6 +205,7 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
 
 
