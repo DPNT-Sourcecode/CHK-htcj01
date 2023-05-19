@@ -90,7 +90,11 @@ class OrderUnit {
         Integer remainingQuantity = quantity;
         if (offer != null) {
             timesAffected = (quantity / offer.getQuantity());
-            offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
+            if(offer.isDynamic()){
+                offerTotal = offer.computeFinalPrice(new OfferContext(this, offer));
+            } else {
+                offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
+            }
             remainingQuantity = quantity % offer.getQuantity();
         }
         return offerTotal + recursivelyComputeTotal(remainingQuantity);
@@ -123,3 +127,4 @@ class OrderUnit {
         return false;
     }
 }
+
