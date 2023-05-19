@@ -91,23 +91,16 @@ public class CheckoutSolution {
      * this way is possible to create an Offer able to match a bundle of different SKUs.
      */
     static class Offer {
-        private final Map<String, OfferRule> rules = new HashMap<>();
+        private final OfferRule rule;
         private final Integer finalPrice;
 
         //Testing if is simple to directly set how many items are affected by this offer.
         private final Integer quantity;
 
         public Offer(OfferRule rule, Integer finalPrice, Integer quantity) {
-            this(List.of(new OfferRule[]{rule}), finalPrice, quantity);
-        }
-
-        public Offer(List<OfferRule> offerRules, Integer finalPrice, Integer quantity) {
-            this.quantity = quantity;
-            //Only allow 1 condition per SKU
-            offerRules.forEach(rule -> {
-                rules.putIfAbsent(rule.sku, rule);
-            });
+            this.rule = rule;
             this.finalPrice = finalPrice;
+            this.quantity = quantity;
         }
 
         public Integer getQuantity() {
@@ -118,30 +111,9 @@ public class CheckoutSolution {
             return finalPrice;
         }
 
-        /**
-         * Iterates over the Offer conditions until identify there are no matching conditions.
-         * If there are matching conditions, the final price is computed.
-         * @param orderUnits
-         * @return
-         */
-        OfferRuleCheckResult isSatisfiedBy(List<OrderUnit> orderUnits){
-            //NOTE: This method shouldn't return a boolean
-            //If there are matches this method should return a new List of OrderUnit.
-            OfferRuleCheckResult result = new OfferRuleCheckResult();
-            orderUnits.forEach(unit -> {
-                OfferRule rule = rules.get(unit.sku);
-                //The unit can match with a same offer multiple times.
-                //How can we handle it?
-                //We can create a class to represent how many times it matched.
-                Boolean isSatisfied = rule.isSatisfiedBy(unit);
-                if ( isSatisfied) {
-                    result.addMatched(unit);
-                } else {
-                    result.addUnMatched(unit);
-                }
-            });
-            return result;
-        }
+       public Boolean isSatisfiedBy(OrderUnit unit){
+            return this.rule.isSatisfiedBy(unit);
+       }
 
         //TODO: We''l probably need a method to compute the price (probably a command class to represent it)
         //This way, we can ensure the class will consider the items that matched with Offers and those units that didn't.
@@ -204,7 +176,14 @@ public class CheckoutSolution {
         });
         return 0;
     }
+
+    private void assignOffers(List<OrderUnit> units){
+        offers.forEach(offer -> {
+            offer.isSatisfiedBy(units);
+        });
+    }
 }
+
 
 
 
