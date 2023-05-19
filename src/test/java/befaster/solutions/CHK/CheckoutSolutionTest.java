@@ -23,7 +23,7 @@ class CheckoutSolutionTest {
     public void shouldIgnoreUnmappedSKU() {
         CheckoutSolution checkout = new CheckoutSolution();
         Integer total = checkout.checkout("A,A,B,C,D,F");
-        Assertions.assertEquals(165, total);
+        Assertions.assertEquals(-1, total);
     }
 
     @Test
@@ -69,6 +69,7 @@ class CheckoutSolutionTest {
     }
 
 }
+
 
 
 

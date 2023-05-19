@@ -137,7 +137,7 @@ public class CheckoutSolution {
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
         List<String> skusList = List.of(skus.split(",")) ;
-        if (prices.keySet().stream().filter(skusList::contains).count() <= 0) return -1;
+        if (skusList.stream().filter(prices.keySet()::contains).count() <= skusList.size()) return -1;
         Map<String, OrderUnit>  orderUnits = parseSKUs(skusList);
         assignOffers(orderUnits);
         return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
@@ -164,6 +164,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
