@@ -18,6 +18,13 @@ public class CheckoutSolution {
             this.quantity = quantity;
         }
 
+        /**
+         * Method to identify if this specific condition is satisfied by the SKUs
+         * Note: To be able to match a Condition twice, the Offer should be able to subtract the skus size.
+         * This way we can apply the check recursively.
+         * @param skuIds
+         * @return
+         */
         boolean isSatisfiedBy(List<String> skuIds){
             Map<String, List<String>> map = skuIds.stream().collect(Collectors.groupingBy((item) -> item));
             //TODO:
@@ -27,12 +34,18 @@ public class CheckoutSolution {
         }
     }
 
+    /**
+     * A class to represent an Offer
+     *
+     * An Offer is composed by multiple OfferCondition,
+     * this way is possible to create an Offer able to match a bundle of different SKUs.
+     */
     static class Offer {
-        private final List<String> expectedSkus;
+        private final List<OfferCondition> offerConditions = new ArrayList<>();
         private final Integer finalPrice;
 
-        public Offer(List<String> expectedSkus, Integer finalPrice) {
-            this.expectedSkus = expectedSkus;
+        public Offer(List<OfferCondition> offerConditions, Integer finalPrice) {
+            this.offerConditions.addAll(offerConditions);
             this.finalPrice = finalPrice;
         }
 
@@ -40,16 +53,24 @@ public class CheckoutSolution {
             return finalPrice;
         }
 
+        /**
+         * Iterates over the Offer conditions until identify there are no matching conditions.
+         * If there are matching conditions, the final price is computed.
+         * @param skuIds
+         * @return
+         */
         boolean isSatisfiedBy(List<String> skuIds){
             return false;
         }
+
+        //TODO: We''l probably need a method to compute the price (probably a command class to represent it)
+        //This way, we can ensure the class will consider the items that matched with Offers and those units that didn't.
     }
 
     private final static List<Offer> offers = new ArrayList<>();
 
     static {
-        Offer offer = new Offer();
-        offers.add(offer);
+
     }
 
     public Integer checkout(String skus) {
