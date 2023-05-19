@@ -36,7 +36,8 @@ class OrderUnit {
     }
 
     public Integer getTotal() {
-        Integer computedTotal = recursivelyComputeTotal(this.quantity - this.discounts.size());
+        Integer computedQuantity = (this.quantity - this.discounts.size() > 0)? this.quantity - this.discounts.size() : 0;
+        Integer computedTotal = recursivelyComputeTotal(computedQuantity);
         Integer discount = 0;
         if (this.discounts != null) {
             discount = this.discounts.stream().mapToInt(Discount::getValue).sum();

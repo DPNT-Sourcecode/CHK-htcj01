@@ -56,8 +56,8 @@ class CheckoutSolutionTest {
     public void shouldSumSkusMatchingAnOfferTwice() {
         CheckoutSolution checkout = new CheckoutSolution();
 
-//        Assertions.assertEquals(330, checkout.checkout("AAAAAAAA"));
-//        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
+        Assertions.assertEquals(330, checkout.checkout("AAAAAAAA"));
+        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
 
         //AAAAA = 200, EE = 80 (B), AAA=130, BB=45
         Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
@@ -65,12 +65,12 @@ class CheckoutSolutionTest {
         //AA=100 B(B)=30 CC=40 DD=30 EE=80
         //It's failing because we're applying the discount in the computed total
         //Should not apply offers if there are discounts?
-//        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE")); //265
-//        Assertions.assertEquals(280, checkout.checkout("CCADDEEBBA"));
-//
-//        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
-//        Assertions.assertEquals(445, checkout.checkout("AAAAAAAAAABB"));
-//        Assertions.assertEquals(465, checkout.checkout("AAAAAAAAAABBC"));
+        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE")); //265
+        Assertions.assertEquals(280, checkout.checkout("CCADDEEBBA"));
+
+        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
+        Assertions.assertEquals(445, checkout.checkout("AAAAAAAAAABB"));
+        Assertions.assertEquals(465, checkout.checkout("AAAAAAAAAABBC"));
     }
 
     @Test
@@ -112,6 +112,7 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(80, checkout.checkout("EE"));
         Assertions.assertEquals(160, checkout.checkout("EEBEEB"));
         Assertions.assertEquals(280, checkout.checkout("EEEEEEE"));
+        //EE EE EE E B
         Assertions.assertEquals(280, checkout.checkout("EEEEEEEB"));
     }
 }
