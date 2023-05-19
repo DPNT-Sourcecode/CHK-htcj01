@@ -37,10 +37,9 @@ public class CheckoutSolution {
             return sku;
         }
 
-        //TODO: If we previously split the OrderUnit we can just apply the offer here.
         public Integer getTotal() {
-            if (offers.size() > 0) return offers.stream().reduce(0, (current, previous) -> current.finalPrice + previous.finalPrice);
-            return 0;
+            if (offers.size() > 0) return offers.stream().mapToInt(Offer::getFinalPrice).sum();
+            return quantity * price;
         }
     }
 

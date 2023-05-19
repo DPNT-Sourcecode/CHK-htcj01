@@ -33,6 +33,9 @@ class CheckoutSolutionTest {
 
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A").get("A").getQuantity(), 1);
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").get("A").getQuantity(), 2);
+
+        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").get("A").getTotal(), 100);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs("B").size(), 30);
     }
 
 }
