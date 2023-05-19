@@ -1,7 +1,5 @@
 package befaster.solutions.CHK;
 
-import befaster.runner.SolutionNotImplementedException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,11 +26,11 @@ public class CheckoutSolution {
         }
     }
 
-    static class OfferCondition {
+    static class OfferRule {
         private final String sku;
         private final Integer quantity;
 
-        public OfferCondition(String sku, Integer quantity) {
+        public OfferRule(String sku, Integer quantity) {
             this.sku = sku;
             this.quantity = quantity;
         }
@@ -64,12 +62,14 @@ public class CheckoutSolution {
      * this way is possible to create an Offer able to match a bundle of different SKUs.
      */
     static class Offer {
-        private final Map<String, List<OfferCondition>> conditions = new HashMap<>();
+        private final Map<String, OfferRule> conditions = new HashMap<>();
         private final Integer finalPrice;
 
-        public Offer(List<OfferCondition> offerConditions, Integer finalPrice) {
-            Map<String, List<OfferCondition>> conditions = offerConditions.stream().collect(Collectors.groupingBy(OfferCondition::getSku));
-            conditions.putAll(conditions);
+        public Offer(List<OfferRule> offerRules, Integer finalPrice) {
+            //Only allow 1 condition per SKU
+            offerRules.forEach(condition -> {
+                conditions.putIfAbsent(condition.sku, condition);
+            });
             this.finalPrice = finalPrice;
         }
 
@@ -85,7 +85,8 @@ public class CheckoutSolution {
          */
         boolean isSatisfiedBy(List<OrderUnit> orderUnits){
             orderUnits.forEach(unit -> {
-                offerConditions.
+                OfferRule condition = conditions.get(unit.sku);
+
             });
             return false;
         }
@@ -112,4 +113,5 @@ public class CheckoutSolution {
         });
     }
 }
+
 
