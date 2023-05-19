@@ -45,8 +45,8 @@ class OrderUnit {
         Integer timesAffected = 0;
         Integer remainingQuantity = this.quantity;
         if (offer != null) {
-            offerTotal = offer != null ? offer.getFinalPrice() : 0;
             timesAffected = (this.quantity / offer.getQuantity());
+            offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
             remainingQuantity = this.quantity % offer.getQuantity();
         }
 
@@ -55,7 +55,8 @@ class OrderUnit {
              discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
          }
 
-        return (offerTotal * timesAffected) + (remainingQuantity * price) - discount;
+        Integer bestTotal = discounts.size() > 0 && offerTotal <= discount? offerTotal : discount;
+        return bestTotal + (remainingQuantity * price) - discount;
     }
 
     public void addDiscount(Discount discount){
@@ -77,4 +78,5 @@ class OrderUnit {
         return false;
     }
 }
+
 
