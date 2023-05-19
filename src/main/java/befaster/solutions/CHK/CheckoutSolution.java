@@ -38,12 +38,16 @@ public class CheckoutSolution {
         offers.add(new Offer("A", new OfferRule("A", 5), 200));
         offers.add(new Offer("B", new OfferRule("B", 2), 45));
 
-        //How to give the discount in the next? Maybe allow to declare a lambda and invoke the Offer with the Unit
-        Function<OfferContext, Integer> dynamicPriceFn = (ctx) -> {
-
-            return 0;
+        Function<OfferContext, Integer> discountFN = (ctx) -> {
+            Offer offer = ctx.offer();
+            OrderUnit unit = ctx.unit();
+            int remaining = unit.getQuantity() % offer.getQuantity();
+            int timesToApply = unit.getQuantity() / offer.getQuantity();
+            int total = unit.getQuantity() * unit.getTotal();
+            int discount = timesToApply * unit.getTotal();
+            return total - discount + (remaining * unit.getTotal());
         };
-        offers.add(new Offer("E", new OfferRule("B", 3), dynamicPriceFn));
+        offers.add(new Offer("E", new OfferRule("B", 3), discountFN));
     }
 
     public Integer checkout(String skus) {
@@ -89,3 +93,4 @@ public class CheckoutSolution {
         });
     }
 }
+
