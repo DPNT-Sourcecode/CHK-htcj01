@@ -146,12 +146,11 @@ public class CheckoutSolution {
 
         offers.add(new Offer("A", new OfferRule("A", 3), 130));
 
-        //How to prioritize this offer? We can check when setting the match offer
         offers.add(new Offer("A", new OfferRule("A", 5), 200));
         offers.add(new Offer("B", new OfferRule("B", 2), 45));
 
         //How to give the discount in the next? Maybe allow to declare a lambda and invoke the Offer with the Unit
-        offers.add(new Offer("E", new OfferRule("B", 2), 45));
+        offers.add(new Offer("E", new OfferRule("B", 3), 45));
     }
 
     public Integer checkout(String skus) {

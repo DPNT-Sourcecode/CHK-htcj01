@@ -86,4 +86,9 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(unit.getTotal(), 250);
     }
 
+    @Test
+    public void shouldApplyDiscountInTheNextItem() {
+
+    }
+
 }
