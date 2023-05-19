@@ -46,12 +46,11 @@ public class CheckoutSolution {
          * @param skuIds
          * @return
          */
-        boolean isSatisfiedBy(List<String> skuIds){
-            Map<String, List<String>> map = skuIds.stream().collect(Collectors.groupingBy((item) -> item));
+        boolean isSatisfiedBy(OrderUnit unit){
             //TODO:
             //What can happen if I have multiple items that can match with the same offer twice?
             //Do I have to implement a method to calculate the price?
-            return map.getOrDefault(sku, new ArrayList<>()).size() >= quantity;
+            return unit.quantity >= quantity;
         }
     }
 
@@ -62,13 +61,13 @@ public class CheckoutSolution {
      * this way is possible to create an Offer able to match a bundle of different SKUs.
      */
     static class Offer {
-        private final Map<String, OfferRule> conditions = new HashMap<>();
+        private final Map<String, OfferRule> rules = new HashMap<>();
         private final Integer finalPrice;
 
         public Offer(List<OfferRule> offerRules, Integer finalPrice) {
             //Only allow 1 condition per SKU
-            offerRules.forEach(condition -> {
-                conditions.putIfAbsent(condition.sku, condition);
+            offerRules.forEach(rule -> {
+                rules.putIfAbsent(rule.sku, rule);
             });
             this.finalPrice = finalPrice;
         }
@@ -85,7 +84,8 @@ public class CheckoutSolution {
          */
         boolean isSatisfiedBy(List<OrderUnit> orderUnits){
             orderUnits.forEach(unit -> {
-                OfferRule condition = conditions.get(unit.sku);
+                OfferRule rule = rules.get(unit.sku);
+                rule.isSatisfiedBy()
 
             });
             return false;
@@ -113,5 +113,6 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
