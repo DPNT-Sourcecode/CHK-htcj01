@@ -54,12 +54,12 @@ class CheckoutSolutionTest {
         CheckoutSolution checkout = new CheckoutSolution();
         //I'll have to apply both offers
         Assertions.assertEquals(330, checkout.checkout("AAAAAAAA"));
-//        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
-//        Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
-//
-//        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
-//        Assertions.assertEquals(445, checkout.checkout("AAAAAAAAAABB"));
-//        Assertions.assertEquals(465, checkout.checkout("AAAAAAAAAABBC"));
+        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
+        Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
+
+        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
+        Assertions.assertEquals(445, checkout.checkout("AAAAAAAAAABB"));
+        Assertions.assertEquals(465, checkout.checkout("AAAAAAAAAABBC"));
     }
 
     @Test

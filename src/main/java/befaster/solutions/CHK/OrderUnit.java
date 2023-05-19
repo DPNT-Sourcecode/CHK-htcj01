@@ -36,7 +36,17 @@ class OrderUnit {
     }
 
     public Integer getTotal() {
-        return computeTotal(this.matchedOffer);
+        Integer computedTotal = recursivelyComputeTotal(this.quantity);
+        Integer discount = 0;
+        if (this.discounts != null) {
+            discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
+        }
+
+        if (discounts.size() > 0 && discount <= computedTotal) {
+            Integer totalWithDiscount = computedTotal + discount;
+            return totalWithDiscount < 0? 0 : totalWithDiscount;
+        }
+        return computedTotal;
     }
 
     //TODO: Maybe is better to change and use the offer candidates only
@@ -112,5 +122,6 @@ class OrderUnit {
         return false;
     }
 }
+
 
 
