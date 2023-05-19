@@ -14,26 +14,29 @@ class Offer {
     private final String sku;
     private final OfferRule rule;
     private final Integer finalPrice;
-
     private final Function<OfferContext, Integer> dynamicPriceFN;
 
-    public Offer(String sku, OfferRule rule, Integer finalPrice) {
+    private final Function<OfferContext, Discount> computeDiscountFN;
+
+    public Offer(String sku, OfferRule rule, Integer finalPrice, Function<OfferContext, Discount> computeDiscountFN) {
         this.sku = sku;
         this.rule = rule;
         this.finalPrice = finalPrice;
+        this.computeDiscountFN = computeDiscountFN;
         this.dynamicPriceFN = null;
     }
 
-    public Offer(String sku, OfferRule rule, Function<OfferContext, Integer> dynamicPriceFN) {
+    public Offer(String sku, OfferRule rule, Function<OfferContext, Integer> dynamicPriceFN, Function<OfferContext, Discount> computeDiscountFN) {
         this.sku = sku;
         this.rule = rule;
         this.dynamicPriceFN = dynamicPriceFN;
+        this.computeDiscountFN = computeDiscountFN;
         this.finalPrice = null;
     }
 
 
     public List<Discount> computeDiscounts(OfferContext ctx) {
-
+        return
     }
 
     public String getSku() {
@@ -60,5 +63,3 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
-
-

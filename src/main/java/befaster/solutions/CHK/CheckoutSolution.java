@@ -20,13 +20,13 @@ public class CheckoutSolution {
         prices.put("D", 15);
         prices.put("E", 40);
 
-        offers.add(new Offer("A", new OfferRule("A", 3), 130));
+        offers.add(new Offer("A", new OfferRule("A", 3), 130, null));
 
-        offers.add(new Offer("A", new OfferRule("A", 5), 200));
-        offers.add(new Offer("B", new OfferRule("B", 2), 45));
+        offers.add(new Offer("A", new OfferRule("A", 5), 200, null));
+        offers.add(new Offer("B", new OfferRule("B", 2), 45, computeDiscountFN));
 
         //This won't work. It should have the B free
-        Function<OfferContext, Integer> discountFN = (ctx) -> {
+        Function<OfferContext, Integer> dynanmicPrice = (ctx) -> {
             Offer offer = ctx.offer();
             OrderUnit unit = ctx.unit();
             int remaining = unit.getQuantity() % offer.getQuantity();
@@ -34,6 +34,16 @@ public class CheckoutSolution {
             int total = unit.getQuantity() * unit.getPrice();
             int discount = timesToApply * unit.getPrice();
             return total - discount + (remaining * unit.getPrice());
+        };
+
+        Function<OfferContext, Discount> discountFN = (ctx) -> {
+            Offer offer = ctx.offer();
+            OrderUnit unit = ctx.unit();
+            int remaining = unit.getQuantity() % offer.getQuantity();
+            int timesToApply = unit.getQuantity() / offer.getQuantity();
+            int total = unit.getQuantity() * unit.getPrice();
+            int discount = timesToApply * unit.getPrice();
+            return new Discount();
         };
         offers.add(new Offer("E", new OfferRule("B", 3), discountFN));
     }
@@ -81,5 +91,3 @@ public class CheckoutSolution {
         });
     }
 }
-
-
