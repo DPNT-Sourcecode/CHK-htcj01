@@ -57,6 +57,7 @@ class OrderUnit {
         //Based on the remainingQuantity, check if there are more offers to be applied
 
 
+        //TODO: If using the recursive strategy - apply the discount only in the end
         Integer discount = 0;
          if (this.discounts != null) {
              discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
