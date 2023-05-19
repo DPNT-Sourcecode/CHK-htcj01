@@ -4,6 +4,7 @@ import befaster.runner.SolutionNotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CheckoutSolution {
 
@@ -16,8 +17,10 @@ public class CheckoutSolution {
             this.quantity = quantity;
         }
 
-
-
+        boolean isSatisfiedBy(List<String> skuIds){
+            skuIds.stream().collect(Collectors.groupingBy((item) -> item));
+            return false;
+        }
     }
 
     static class Offer {
@@ -49,5 +52,3 @@ public class CheckoutSolution {
         throw new SolutionNotImplementedException();
     }
 }
-
-
