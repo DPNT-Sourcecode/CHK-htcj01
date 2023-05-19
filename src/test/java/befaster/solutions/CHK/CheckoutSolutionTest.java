@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,10 @@ class CheckoutSolutionTest {
      */
 
     @Test
-    public void test() {}
+    public void shouldSumSkusWithoutMatchAnyOffer() {
+        CheckoutSolution checkout = new CheckoutSolution();
+        Integer total = checkout.checkout("A,B,C,D");
+        Assertions.assertEquals(115, total);
+    }
 
 }
