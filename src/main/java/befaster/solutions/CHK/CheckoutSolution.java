@@ -19,7 +19,7 @@ public class CheckoutSolution {
 
         private final Integer price;
 
-        private final List<Offer> matchedOffers = new ArrayList<>();
+        private Offer matchedOffer = null;
 
         public OrderUnit(String sku, Integer quantity, Integer price) {
             this.sku = sku;
@@ -36,10 +36,8 @@ public class CheckoutSolution {
         }
 
         public Integer getTotal() {
-            if (this.matchedOffers.size() > 0) {
-                this.matchedOffers.stream().mapToInt(Offer::);
-            }
-            return quantity * price;
+            Integer offerTotal = this.matchedOffer != null? this.matchedOffer.finalPrice : 0;
+            return offerTotal + (matchedOffer.quantity - quantity * price);
         }
     }
 
@@ -202,6 +200,7 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
 
 
