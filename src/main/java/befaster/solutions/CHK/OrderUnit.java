@@ -1,5 +1,8 @@
 package befaster.solutions.CHK;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class to represent the SKU and quantity being ordered.
  */
@@ -10,6 +13,7 @@ class OrderUnit {
     private final Integer price;
 
     private Offer matchedOffer = null;
+    private List<Discount> discounts = new ArrayList<>();
 
     public OrderUnit(String sku, Integer quantity, Integer price) {
         this.sku = sku;
@@ -60,5 +64,6 @@ class OrderUnit {
         }
     }
 }
+
 
 

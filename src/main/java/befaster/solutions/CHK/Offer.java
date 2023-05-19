@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -30,6 +31,11 @@ class Offer {
         this.finalPrice = null;
     }
 
+
+    public List<Discount> computeDiscounts(OfferContext ctx) {
+
+    }
+
     public String getSku() {
         return sku;
     }
@@ -54,4 +60,5 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
+
 
