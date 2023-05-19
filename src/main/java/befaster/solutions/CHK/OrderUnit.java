@@ -56,7 +56,7 @@ class OrderUnit {
          }
 
         Integer bestTotal = discounts.size() > 0 && discount <= offerTotal? discount : offerTotal;
-        return bestTotal + (remainingQuantity * price) - discount;
+        return bestTotal + (remainingQuantity * price) + discount;
     }
 
     public void addDiscount(Discount discount){
@@ -78,3 +78,4 @@ class OrderUnit {
         return false;
     }
 }
+
