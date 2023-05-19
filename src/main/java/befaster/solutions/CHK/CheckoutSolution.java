@@ -162,11 +162,6 @@ public class CheckoutSolution {
 
     //Checks for matching Offers and return a list of OrderUnit with those that matched and those that didn't split in different instances
     public static List<OrderUnit> processOrder(Collection<OrderUnit> units) {
-        List<OrderUnit> result = new ArrayList<>();
-        //Check if the unit match with an Offer and if there are remaining items
-        offers.forEach(offer -> {
-            offer.isSatisfiedBy()
-        });
         return null;
     }
 
@@ -192,13 +187,14 @@ public class CheckoutSolution {
      * @return
      */
     private Integer checkMatchWithOffers(List<OrderUnit> orderUnits) {
-        
+
         offers.forEach(offer -> {
             OfferRuleCheckResult result = offer.isSatisfiedBy(orderUnits);
         });
         return 0;
     }
 }
+
 
 
 
