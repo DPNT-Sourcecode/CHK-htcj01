@@ -59,7 +59,7 @@ class CheckoutSolutionTest {
 //        Assertions.assertEquals(330, checkout.checkout("AAAAAAAA"));
 //        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
 
-        //AAAAA = 200, EE = 80 (B), AAA=130, BB=60
+        //AAAAA = 200, EE = 80 (B), AAA=130, BB=45
         Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
 
 //        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE"));
