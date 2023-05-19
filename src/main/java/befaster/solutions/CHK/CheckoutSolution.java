@@ -123,9 +123,14 @@ public class CheckoutSolution {
                 //The unit can match with a same offer multiple times.
                 //How can we handle it?
                 //We can create a class to represent how many times it matched.
-                rule.isSatisfiedBy(unit);
+                Boolean isSatisfied = rule.isSatisfiedBy(unit);
+                if ( isSatisfied) {
+                    result.addMatched(unit);
+                } else {
+                    result.addUnMatched(unit);
+                }
             });
-            return false;
+            return result;
         }
 
         //TODO: We''l probably need a method to compute the price (probably a command class to represent it)
@@ -187,12 +192,14 @@ public class CheckoutSolution {
      * @return
      */
     private Integer checkMatchWithOffers(List<OrderUnit> orderUnits) {
+        
         offers.forEach(offer -> {
-            Boolean isSatisfied = offer.isSatisfiedBy(orderUnits);
+            OfferRuleCheckResult result = offer.isSatisfiedBy(orderUnits);
         });
         return 0;
     }
 }
+
 
 
 
