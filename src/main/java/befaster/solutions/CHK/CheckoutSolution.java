@@ -43,9 +43,9 @@ public class CheckoutSolution {
             OrderUnit unit = ctx.unit();
             int remaining = unit.getQuantity() % offer.getQuantity();
             int timesToApply = unit.getQuantity() / offer.getQuantity();
-            int total = unit.getQuantity() * unit.getTotal();
-            int discount = timesToApply * unit.getTotal();
-            return total - discount + (remaining * unit.getTotal());
+            int total = unit.getQuantity() * unit.getPrice();
+            int discount = timesToApply * unit.getPrice();
+            return total - discount + (remaining * unit.getPrice());
         };
         offers.add(new Offer("E", new OfferRule("B", 3), discountFN));
     }
@@ -93,4 +93,5 @@ public class CheckoutSolution {
         });
     }
 }
+
 

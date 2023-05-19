@@ -42,7 +42,16 @@ class Offer {
         return finalPrice;
     }
 
+    public Integer computeFinalPrice(OfferContext context) {
+        return this.dynamicPriceFN.apply(context);
+    }
+
+    public boolean isDynamic() {
+        return this.dynamicPriceFN != null;
+    }
+
     public Boolean isSatisfiedBy(OrderUnit unit) {
         return this.rule.isSatisfiedBy(unit);
     }
 }
+

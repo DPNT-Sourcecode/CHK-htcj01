@@ -25,11 +25,18 @@ class OrderUnit {
         return sku;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
     public Integer getTotal() {
         return computeTotal(this.matchedOffer);
     }
 
     public Integer computeTotal(Offer offer) {
+        if (this.matchedOffer.isDynamic()) {
+            return this.matchedOffer.getFinalPrice()
+        }
         Integer offerTotal = 0;
         Integer timesAffected = 0;
         Integer remainingQuantity = this.quantity;
@@ -53,3 +60,4 @@ class OrderUnit {
         }
     }
 }
+
