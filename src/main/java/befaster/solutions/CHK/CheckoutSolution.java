@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CheckoutSolution {
@@ -115,10 +116,20 @@ public class CheckoutSolution {
         private final OfferRule rule;
         private final Integer finalPrice;
 
+        private final Function<OrderUnit, Integer> dynamicPriceFN;
+
         public Offer(String sku, OfferRule rule, Integer finalPrice) {
             this.sku = sku;
             this.rule = rule;
             this.finalPrice = finalPrice;
+            this.dynamicPriceFN = null;
+        }
+
+        public Offer(String sku, OfferRule rule, Function<OrderUnit, Integer> dynamicPriceFN) {
+            this.sku = sku;
+            this.rule = rule;
+            this.dynamicPriceFN = dynamicPriceFN;
+            this.finalPrice = null;
         }
 
         public Integer getQuantity() {
@@ -150,7 +161,10 @@ public class CheckoutSolution {
         offers.add(new Offer("B", new OfferRule("B", 2), 45));
 
         //How to give the discount in the next? Maybe allow to declare a lambda and invoke the Offer with the Unit
-        offers.add(new Offer("E", new OfferRule("B", 3), 45));
+        Function<OrderUnit, Integer> dynamicPriceFn = (unit) -> {
+            return 0;
+        };
+        offers.add(new Offer("E", new OfferRule("B", 3), dynamicPriceFn));
     }
 
     public Integer checkout(String skus) {
@@ -196,4 +210,5 @@ public class CheckoutSolution {
         });
     }
 }
+
 
