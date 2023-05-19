@@ -136,6 +136,7 @@ public class CheckoutSolution {
     }
 
     public Integer checkout(String skus) {
+        if ("".equalsIgnoreCase(skus)) return -1;
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
         List<String> skusList = List.of(skus.split(""));
         if (!isAllSkuValid(skusList)) return -1;
@@ -177,6 +178,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
