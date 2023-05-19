@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CheckoutSolutionTest {
 
@@ -79,10 +76,10 @@ class CheckoutSolutionTest {
         CheckoutSolution.OrderUnit unit = new CheckoutSolution.OrderUnit("A", 6, 50);
         Assertions.assertEquals(unit.getTotal(), 300);
 
-        unit.setMatchedOffer(new CheckoutSolution.Offer("A", new CheckoutSolution.OfferRule("A", 3), 130));
+        unit.setMatchedOffer(new CheckoutSolution.Offer("A", new OfferRule("A", 3), 130));
         Assertions.assertEquals(unit.getTotal(), 260);
 
-        unit.setMatchedOffer(new CheckoutSolution.Offer("A", new CheckoutSolution.OfferRule("A", 5), 200));
+        unit.setMatchedOffer(new CheckoutSolution.Offer("A", new OfferRule("A", 5), 200));
         Assertions.assertEquals(unit.getTotal(), 250);
     }
 
@@ -92,3 +89,4 @@ class CheckoutSolutionTest {
     }
 
 }
+

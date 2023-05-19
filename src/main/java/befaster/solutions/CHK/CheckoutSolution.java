@@ -1,8 +1,6 @@
 package befaster.solutions.CHK;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,31 +77,6 @@ public class CheckoutSolution {
         public void addUnMatched(OrderUnit unit){ this.matched.add(unit);}
     }
 
-    static class OfferRule {
-        private final String sku;
-        private final Integer quantity;
-
-        public OfferRule(String sku, Integer quantity) {
-            this.sku = sku;
-            this.quantity = quantity;
-        }
-
-        public String getSku() {
-            return sku;
-        }
-
-        /**
-         * Method to identify if this specific condition is satisfied by the SKUs
-         * Note: To be able to match a Condition twice, the Offer should be able to subtract the skus size.
-         * This way we can apply the check recursively.
-         * @param unit
-         * @return
-         */
-        Boolean isSatisfiedBy(OrderUnit unit){
-            return unit.quantity >= quantity;
-        }
-    }
-
     /**
      * A class to represent an Offer
      *
@@ -133,7 +106,7 @@ public class CheckoutSolution {
         }
 
         public Integer getQuantity() {
-            return rule.quantity;
+            return rule.getQuantity();
         }
 
         public Integer getFinalPrice() {
@@ -210,5 +183,6 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
