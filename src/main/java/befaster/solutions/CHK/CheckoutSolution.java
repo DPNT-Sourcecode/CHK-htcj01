@@ -37,12 +37,14 @@ public class CheckoutSolution {
 
         public Integer getTotal() {
             Integer offerTotal = 0;
-            Integer offerAffected = 0;
+            Integer timesAffected = 0;
+            Integer remainingQuantity = 0;
             if (this.matchedOffer != null ) {
                 offerTotal = this.matchedOffer != null? this.matchedOffer.finalPrice : 0;
-                offerAffected = this.quantity / this.matchedOffer.getQuantity() * this.quantity;
+                timesAffected = (this.quantity / this.matchedOffer.getQuantity());
+                remainingQuantity = this.quantity % this.matchedOffer.getQuantity();
             }
-            return ( offerTotal * offerAffected) + ((quantity - offerAffected) * price);
+            return ( offerTotal * timesAffected) + (remainingQuantity * price);
         }
 
         public void setMatchedOffer(Offer matchedOffer) {
@@ -161,5 +163,6 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
