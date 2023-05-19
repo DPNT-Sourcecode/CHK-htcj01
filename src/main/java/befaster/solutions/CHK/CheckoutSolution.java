@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CheckoutSolution {
 
@@ -136,7 +137,11 @@ public class CheckoutSolution {
 
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
-        List<String> parsedSKus = Arrays.asList(skus.split(","));
+        Map<String, List<String>> parsedSKus = Arrays
+                                                .asList(skus.split(","))
+                                                    .stream()
+                                                    .collect(Collectors.groupingBy(item -> item))
+                .entrySet().stream().map(entry -> {});
 
     }
 
@@ -154,3 +159,4 @@ public class CheckoutSolution {
         });
     }
 }
+
