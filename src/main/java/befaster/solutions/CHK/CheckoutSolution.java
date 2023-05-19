@@ -178,10 +178,3 @@ public class CheckoutSolution {
         });
     }
 }
-
-
-
-
-
-
-
