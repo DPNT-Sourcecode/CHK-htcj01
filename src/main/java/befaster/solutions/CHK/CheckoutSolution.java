@@ -4,6 +4,7 @@ import befaster.runner.SolutionNotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -63,12 +64,12 @@ public class CheckoutSolution {
      * this way is possible to create an Offer able to match a bundle of different SKUs.
      */
     static class Offer {
-        private final List<OfferCondition> offerConditions = new ArrayList<>();
+        private final Map<String, List<OfferCondition>> conditions = new HashMap<>();
         private final Integer finalPrice;
 
         public Offer(List<OfferCondition> offerConditions, Integer finalPrice) {
-            offerConditions.stream().collect(Collectors.groupingBy(OfferCondition::getSku));
-            this.offerConditions.addAll(offerConditions);
+            Map<String, List<OfferCondition>> conditions = offerConditions.stream().collect(Collectors.groupingBy(OfferCondition::getSku));
+            conditions.putAll(conditions);
             this.finalPrice = finalPrice;
         }
 
@@ -111,3 +112,4 @@ public class CheckoutSolution {
         });
     }
 }
+
