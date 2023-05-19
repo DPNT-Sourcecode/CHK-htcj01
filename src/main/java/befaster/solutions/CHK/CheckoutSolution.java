@@ -37,7 +37,7 @@ public class CheckoutSolution {
 
         public Integer getTotal() {
             if (this.matchedOffers.size() > 0) {
-                this.matchedOffers.stream().mapToInt(Offer::getFinalPrice);
+                this.matchedOffers.stream().mapToInt(Offer::);
             }
             return quantity * price;
         }
@@ -95,15 +95,20 @@ public class CheckoutSolution {
         private final Integer quantity;
 
         public Offer(OfferRule rule, Integer finalPrice, Integer quantity) {
-            this(List.of(new OfferRule[]{rule}), finalPrice);
+            this(List.of(new OfferRule[]{rule}), finalPrice, quantity);
         }
 
-        public Offer(List<OfferRule> offerRules, Integer finalPrice) {
+        public Offer(List<OfferRule> offerRules, Integer finalPrice, Integer quantity) {
+            this.quantity = quantity;
             //Only allow 1 condition per SKU
             offerRules.forEach(rule -> {
                 rules.putIfAbsent(rule.sku, rule);
             });
             this.finalPrice = finalPrice;
+        }
+
+        public Integer getQuantity() {
+            return quantity;
         }
 
         public Integer getFinalPrice() {
@@ -151,8 +156,8 @@ public class CheckoutSolution {
         prices.put("C", 20);
         prices.put("D", 15);
 
-        offers.add(new Offer(new OfferRule("A", 3), 130));
-        offers.add(new Offer(new OfferRule("B", 2), 45));
+        offers.add(new Offer(new OfferRule("A", 3), 130, 3));
+        offers.add(new Offer(new OfferRule("B", 2), 45, 3));
     }
 
     public Integer checkout(String skus) {
@@ -197,6 +202,7 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
 
 
