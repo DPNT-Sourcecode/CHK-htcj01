@@ -22,36 +22,36 @@ class CheckoutSolutionTest {
     @Test
     public void shouldIgnoreUnmappedSKU() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Integer total = checkout.checkout("A,A,B,C,D,F");
+        Integer total = checkout.checkout("AABCDF");
         Assertions.assertEquals(-1, total);
     }
 
     @Test
     public void shouldSumSkusWithoutMatchAnyOffer() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Integer total = checkout.checkout("A,A,B,C,D");
+        Integer total = checkout.checkout("AABCD");
         Assertions.assertEquals(165, total);
     }
 
     @Test
     public void shouldSumSkusMatchingSingleOffer() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Integer total = checkout.checkout("A,A,A,B,C,D");
+        Integer total = checkout.checkout("AAABCD");
         Assertions.assertEquals(195, total);
     }
 
     @Test
     public void shouldSumSkusMatchingAnOfferTwice() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Assertions.assertEquals(260, checkout.checkout("A,A,A,A,A,A"));
-        Assertions.assertEquals(305, checkout.checkout("A,A,A,A,A,A,B,B"));
-        Assertions.assertEquals(325, checkout.checkout("A,A,A,A,A,A,B,B,C"));
+        Assertions.assertEquals(260, checkout.checkout("AAAAAA"));
+        Assertions.assertEquals(305, checkout.checkout("AAAAAABB"));
+        Assertions.assertEquals(325, checkout.checkout("AAAAAABBC"));
     }
 
     @Test
     public void shouldSumSkusMatchingMultipleOffers() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Integer total = checkout.checkout("A,A,A,B,B,C,D");
+        Integer total = checkout.checkout("AAABBCD");
         Assertions.assertEquals(210, total);
     }
 
