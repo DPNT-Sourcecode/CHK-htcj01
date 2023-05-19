@@ -18,6 +18,9 @@ public class CheckoutSolution {
 
         private final Integer price;
 
+        /**
+         * Represents offers that matched with this OrderUnit
+         */
         private final List<Offer> matchedOffers = new ArrayList<>();
 
         public OrderUnit(String sku, Integer quantity, Integer price) {
@@ -33,7 +36,10 @@ public class CheckoutSolution {
         public String getSku() {
             return sku;
         }
+
+        //TODO: If we previously split the OrderUnit we can just apply the offer here.
         public Integer getTotal() {
+            if (offers.size() > 0) return offers.stream().reduce(0, (current, previous) -> current.finalPrice + previous.finalPrice);
             return 0;
         }
     }

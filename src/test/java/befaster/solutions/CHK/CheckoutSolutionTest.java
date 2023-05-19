@@ -28,10 +28,11 @@ class CheckoutSolutionTest {
     @Test
     public void shouldTransformSkusToOrderUnits() {
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A").size(), 1);
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A").get("A").getQuantity(), 1);
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").size(), 1);
-        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").get("A").getQuantity(), 2);
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A,B").size(), 2);
+
+        Assertions.assertEquals(CheckoutSolution.parseSKUs("A").get("A").getQuantity(), 1);
+        Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").get("A").getQuantity(), 2);
     }
 
 }
