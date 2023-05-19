@@ -2,6 +2,7 @@ package befaster.solutions.CHK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,7 +156,17 @@ public class CheckoutSolution {
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
         Map<String, OrderUnit>  orderUnits = parseSKUs(skus);
-        return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
+        List<OrderUnit> processedOrder = processOrder(orderUnits.values());
+        return processedOrder.stream().mapToInt(OrderUnit::getTotal).sum();
+    }
+    
+    //Checks for matching Offers and return a list of OrderUnit with those that matched and those that didn't split in different instances
+    public static List<OrderUnit> processOrder(Collection<OrderUnit> units) {
+        //Check if the unit match with an Offer and if there are remaining items
+        offers.forEach(offer -> {
+            offer.isSatisfiedBy()
+        });
+        return null;
     }
 
     public static Map<String, OrderUnit> parseSKUs(String skus) {
@@ -186,5 +197,6 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
 
