@@ -26,6 +26,10 @@ public class CheckoutSolution {
             this.price = price;
         }
 
+        public Integer getQuantity() {
+            return quantity;
+        }
+
         public String getSku() {
             return sku;
         }
@@ -73,7 +77,8 @@ public class CheckoutSolution {
             //TODO:
             //What can happen if I have multiple items that can match with the same offer twice?
             //Do I have to implement a method to calculate the price?
-            return unit.quantity >= quantity;
+            //return unit.quantity >= quantity;
+            return result;
         }
     }
 
@@ -166,6 +171,7 @@ public class CheckoutSolution {
         offers.forEach(offer -> {
             Boolean isSatisfied = offer.isSatisfiedBy(orderUnits);
         });
+        return 0;
     }
 }
 
