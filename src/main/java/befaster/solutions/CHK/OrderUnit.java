@@ -52,6 +52,10 @@ class OrderUnit {
         return (offerTotal * timesAffected) + (remainingQuantity * price);
     }
 
+    public void addDiscount(Discount discount){
+        this.discounts.add(discount);
+    }
+
     public boolean setMatchedOffer(Offer matchedOffer) {
         if (this.matchedOffer != null) {
             Integer total = getTotal();

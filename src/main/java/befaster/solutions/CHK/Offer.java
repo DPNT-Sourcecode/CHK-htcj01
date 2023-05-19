@@ -35,7 +35,7 @@ class Offer {
     }
 
     public List<Discount> computeDiscounts(OfferContext ctx) {
-        return computeDiscounts(ctx);
+        return computeDiscountFN.apply(ctx);
     }
 
     public String getSku() {

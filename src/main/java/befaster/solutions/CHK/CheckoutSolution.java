@@ -90,7 +90,13 @@ public class CheckoutSolution {
             OrderUnit unit = units.get(offer.getSku());
             if (unit != null && offer.isSatisfiedBy(unit)) {
                 unit.setMatchedOffer(offer);
+                discounts.addAll(offer.computeDiscounts(new OfferContext(unit, offer)));
             }
+        });
+
+        discounts.forEach(discount -> {
+            OrderUnit unit = units.get(discount.getSku());
+            unit.addDiscount(discount);
         });
     }
 }
