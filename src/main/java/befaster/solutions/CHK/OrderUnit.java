@@ -36,16 +36,16 @@ class OrderUnit {
     }
 
     public Integer getTotal() {
-        Integer computedTotal = recursivelyComputeTotal(this.quantity);
+        Integer computedTotal = recursivelyComputeTotal(this.quantity - this.discounts.size());
         Integer discount = 0;
         if (this.discounts != null) {
             discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
         }
 
-        if (discounts.size() > 0 && discount <= computedTotal) {
-            Integer totalWithDiscount = computedTotal + discount;
-            return totalWithDiscount < 0? 0 : totalWithDiscount;
-        }
+//        if (discounts.size() > 0 && discount <= computedTotal) {
+//            Integer totalWithDiscount = computedTotal + discount;
+//            return totalWithDiscount < 0? 0 : totalWithDiscount;
+//        }
         return computedTotal;
     }
 
@@ -122,4 +122,5 @@ class OrderUnit {
         return false;
     }
 }
+
 

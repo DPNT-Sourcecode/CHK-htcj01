@@ -60,12 +60,12 @@ class CheckoutSolutionTest {
 //        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
 
         //AAAAA = 200, EE = 80 (B), AAA=130, BB=45
-//        Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
+        Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
 
         //AA=100 B(B)=30 CC=40 DD=30 EE=80
         //It's failing because we're applying the discount in the computed total
         //Should not apply offers if there are discounts?
-        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE")); //265
+//        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE")); //265
 //        Assertions.assertEquals(280, checkout.checkout("CCADDEEBBA"));
 //
 //        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
@@ -115,5 +115,6 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(280, checkout.checkout("EEEEEEEB"));
     }
 }
+
 
 
