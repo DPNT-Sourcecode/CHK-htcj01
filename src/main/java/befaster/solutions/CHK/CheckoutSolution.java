@@ -77,14 +77,8 @@ public class CheckoutSolution {
          * @param unit
          * @return
          */
-        OfferRuleCheckResult isSatisfiedBy(OrderUnit unit){
-            OfferRuleCheckResult result = new OfferRuleCheckResult();
-
-            //TODO:
-            //What can happen if I have multiple items that can match with the same offer twice?
-            //Do I have to implement a method to calculate the price?
-            //return unit.quantity >= quantity;
-            return result;
+        Boolean isSatisfiedBy(OrderUnit unit){
+            return unit.quantity >= quantity;
         }
     }
 
@@ -120,9 +114,10 @@ public class CheckoutSolution {
          * @param orderUnits
          * @return
          */
-        boolean isSatisfiedBy(List<OrderUnit> orderUnits){
+        OfferRuleCheckResult isSatisfiedBy(List<OrderUnit> orderUnits){
             //NOTE: This method shouldn't return a boolean
             //If there are matches this method should return a new List of OrderUnit.
+            OfferRuleCheckResult result = new OfferRuleCheckResult();
             orderUnits.forEach(unit -> {
                 OfferRule rule = rules.get(unit.sku);
                 //The unit can match with a same offer multiple times.
@@ -159,9 +154,10 @@ public class CheckoutSolution {
         List<OrderUnit> processedOrder = processOrder(orderUnits.values());
         return processedOrder.stream().mapToInt(OrderUnit::getTotal).sum();
     }
-    
+
     //Checks for matching Offers and return a list of OrderUnit with those that matched and those that didn't split in different instances
     public static List<OrderUnit> processOrder(Collection<OrderUnit> units) {
+        List<OrderUnit> result = new ArrayList<>();
         //Check if the unit match with an Offer and if there are remaining items
         offers.forEach(offer -> {
             offer.isSatisfiedBy()
@@ -197,6 +193,7 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
 
 
