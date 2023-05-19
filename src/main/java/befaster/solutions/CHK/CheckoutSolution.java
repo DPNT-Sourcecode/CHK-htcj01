@@ -4,6 +4,7 @@ import befaster.runner.SolutionNotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CheckoutSolution {
@@ -18,7 +19,7 @@ public class CheckoutSolution {
         }
 
         boolean isSatisfiedBy(List<String> skuIds){
-            skuIds.stream().collect(Collectors.groupingBy((item) -> item));
+            Map<String, List<String>> map = skuIds.stream().collect(Collectors.groupingBy((item) -> item));
             return false;
         }
     }
@@ -52,3 +53,4 @@ public class CheckoutSolution {
         throw new SolutionNotImplementedException();
     }
 }
+
