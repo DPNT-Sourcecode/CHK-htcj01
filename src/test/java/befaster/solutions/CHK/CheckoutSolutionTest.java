@@ -86,10 +86,10 @@ class CheckoutSolutionTest {
     @Test
     public void shouldApplyDiscountInTheNextItem() {
         CheckoutSolution checkout = new CheckoutSolution();
-//        Assertions.assertEquals(80, checkout.checkout("EEE"));
-//        Assertions.assertEquals(80, checkout.checkout("EE"));
-//        Assertions.assertEquals(160, checkout.checkout("EEEEEE"));
-        Assertions.assertEquals(200, checkout.checkout("EEEEEEE"));
+        Assertions.assertEquals(80, checkout.checkout("EEE"));
+        Assertions.assertEquals(80, checkout.checkout("EE"));
+        Assertions.assertEquals(160, checkout.checkout("EEEEEE"));
+        Assertions.assertEquals(240, checkout.checkout("EEEEEEE"));
     }
 
 }
