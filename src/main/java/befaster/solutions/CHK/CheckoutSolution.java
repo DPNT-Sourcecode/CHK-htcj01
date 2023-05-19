@@ -36,6 +36,10 @@ public class CheckoutSolution {
             this.quantity = quantity;
         }
 
+        public String getSku() {
+            return sku;
+        }
+
         /**
          * Method to identify if this specific condition is satisfied by the SKUs
          * Note: To be able to match a Condition twice, the Offer should be able to subtract the skus size.
@@ -63,6 +67,7 @@ public class CheckoutSolution {
         private final Integer finalPrice;
 
         public Offer(List<OfferCondition> offerConditions, Integer finalPrice) {
+            offerConditions.stream().collect(Collectors.groupingBy(OfferCondition::getSku));
             this.offerConditions.addAll(offerConditions);
             this.finalPrice = finalPrice;
         }
@@ -78,6 +83,9 @@ public class CheckoutSolution {
          * @return
          */
         boolean isSatisfiedBy(List<OrderUnit> orderUnits){
+            orderUnits.forEach(unit -> {
+                offerConditions.
+            });
             return false;
         }
 
@@ -99,9 +107,7 @@ public class CheckoutSolution {
 
     private Integer checkMatchWithOffers(List<OrderUnit> orderUnits) {
         offers.forEach(offer -> {
-            Boolean isSatisfied = offer.isSatisfiedBy(skus);
+            Boolean isSatisfied = offer.isSatisfiedBy(orderUnits);
         });
     }
 }
-
-
