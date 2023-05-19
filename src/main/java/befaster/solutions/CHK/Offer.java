@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -35,7 +36,7 @@ class Offer {
     }
 
     public List<Discount> computeDiscounts(OfferContext ctx) {
-        return computeDiscountFN.apply(ctx);
+        return computeDiscountFN != null?  computeDiscountFN.apply(ctx) : new ArrayList<>();
     }
 
     public String getSku() {
@@ -62,5 +63,6 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
+
 
 
