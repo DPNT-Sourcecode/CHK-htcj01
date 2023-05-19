@@ -40,7 +40,7 @@ public class CheckoutSolution {
             Integer offerAffected = 0;
             if (this.matchedOffer != null ) {
                 offerTotal = this.matchedOffer != null? this.matchedOffer.finalPrice : 0;
-                offerAffected = this.matchedOffer.quantity;
+                offerAffected = this.matchedOffer.getQuantity();
             }
             return offerTotal + ((quantity - offerAffected) * price);
         }
@@ -100,18 +100,14 @@ public class CheckoutSolution {
         private final OfferRule rule;
         private final Integer finalPrice;
 
-        //Testing if is simple to directly set how many items are affected by this offer.
-        private final Integer quantity;
-
-        public Offer(String sku, OfferRule rule, Integer finalPrice, Integer quantity) {
+        public Offer(String sku, OfferRule rule, Integer finalPrice) {
             this.sku = sku;
             this.rule = rule;
             this.finalPrice = finalPrice;
-            this.quantity = quantity;
         }
 
         public Integer getQuantity() {
-            return quantity;
+            return rule.quantity;
         }
 
         public Integer getFinalPrice() {
@@ -132,8 +128,8 @@ public class CheckoutSolution {
         prices.put("C", 20);
         prices.put("D", 15);
 
-        offers.add(new Offer("A", new OfferRule("A", 3), 130, 3));
-        offers.add(new Offer("A", new OfferRule("B", 2), 45, 3));
+        offers.add(new Offer("A", new OfferRule("A", 3), 130));
+        offers.add(new Offer("B", new OfferRule("B", 2), 45));
     }
 
     public Integer checkout(String skus) {
@@ -165,12 +161,3 @@ public class CheckoutSolution {
         });
     }
 }
-
-
-
-
-
-
-
-
-

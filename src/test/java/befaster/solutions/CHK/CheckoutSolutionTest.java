@@ -33,6 +33,13 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    public void shouldSumSkusMatchingMultipleOffers() {
+        CheckoutSolution checkout = new CheckoutSolution();
+        Integer total = checkout.checkout("A,A,A,B,B,C,D");
+        Assertions.assertEquals(210, total);
+    }
+
+    @Test
     public void shouldTransformSkusToOrderUnits() {
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A").size(), 1);
         Assertions.assertEquals(CheckoutSolution.parseSKUs("A,A").size(), 1);
