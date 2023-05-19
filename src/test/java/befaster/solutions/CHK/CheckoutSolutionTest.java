@@ -46,9 +46,9 @@ class CheckoutSolutionTest {
     @Test
     public void shouldSumSkusMatchingAnOfferTwice() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Assertions.assertEquals(260, checkout.checkout("AAAAAA"));
-        Assertions.assertEquals(305, checkout.checkout("AAAAAABB"));
-        Assertions.assertEquals(325, checkout.checkout("AAAAAABBC"));
+        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
+        Assertions.assertEquals(445, checkout.checkout("AAAAAAAAAABB"));
+        Assertions.assertEquals(465, checkout.checkout("AAAAAAAAAABBC"));
     }
 
     @Test

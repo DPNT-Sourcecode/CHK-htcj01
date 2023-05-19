@@ -34,8 +34,8 @@ class OrderUnit {
     }
 
     public Integer computeTotal(Offer offer) {
-        if (this.matchedOffer.isDynamic()) {
-            return this.matchedOffer.getFinalPrice()
+        if (offer != null && offer.isDynamic()) {
+            return offer.computeFinalPrice(new OfferContext(this, offer));
         }
         Integer offerTotal = 0;
         Integer timesAffected = 0;
@@ -60,4 +60,5 @@ class OrderUnit {
         }
     }
 }
+
 
