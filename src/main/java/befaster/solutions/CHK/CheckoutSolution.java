@@ -143,12 +143,14 @@ public class CheckoutSolution {
         prices.put("B", 30);
         prices.put("C", 20);
         prices.put("D", 15);
+
+        Offer offerA = new Offer();
     }
 
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
         Map<String, OrderUnit>  orderUnits = parseSKUs(skus);
-        return 0;
+        return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
     }
 
     public static Map<String, OrderUnit> parseSKUs(String skus) {
@@ -179,3 +181,4 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
