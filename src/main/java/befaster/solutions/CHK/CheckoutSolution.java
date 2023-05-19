@@ -36,7 +36,7 @@ public class CheckoutSolution {
      * It can internally represent OrderUnit that matched with an Offer
      * and its remaining items that didn't matched.
      */
-    static class OfferRuleCheck {
+    static class OfferRuleCheckResult {
         List<OrderUnit> matched = new ArrayList<>();
         List<OrderUnit> unmatched = new ArrayList<>();
 
@@ -64,7 +64,9 @@ public class CheckoutSolution {
          * @param unit
          * @return
          */
-        boolean isSatisfiedBy(OrderUnit unit){
+        OfferRuleCheckResult isSatisfiedBy(OrderUnit unit){
+            OfferRuleCheckResult result = new OfferRuleCheckResult();
+            
             //TODO:
             //What can happen if I have multiple items that can match with the same offer twice?
             //Do I have to implement a method to calculate the price?
@@ -146,6 +148,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
