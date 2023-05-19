@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CheckoutSolution {
 
@@ -16,11 +15,14 @@ public class CheckoutSolution {
         private final String sku;
         private final Integer quantity;
 
+        private final Integer price;
+
         private final List<Offer> matchedOffers = new ArrayList<>();
 
-        public OrderUnit(String sku, Integer quantity) {
+        public OrderUnit(String sku, Integer quantity, Integer price) {
             this.sku = sku;
             this.quantity = quantity;
+            this.price = price;
         }
 
         public String getSku() {
@@ -66,7 +68,7 @@ public class CheckoutSolution {
          */
         OfferRuleCheckResult isSatisfiedBy(OrderUnit unit){
             OfferRuleCheckResult result = new OfferRuleCheckResult();
-            
+
             //TODO:
             //What can happen if I have multiple items that can match with the same offer twice?
             //Do I have to implement a method to calculate the price?
@@ -110,7 +112,7 @@ public class CheckoutSolution {
                 //The unit can match with a same offer multiple times.
                 //How can we handle it?
                 //We can create a class to represent how many times it matched.
-                Boolean isSatisfied = rule.isSatisfiedBy(unit);
+                rule.isSatisfiedBy(unit);
             });
             return false;
         }
@@ -123,9 +125,13 @@ public class CheckoutSolution {
     }
 
     private final static List<Offer> offers = new ArrayList<>();
+    private final static Map<String, Integer> prices = new HashMap<>();
 
     static {
-
+        prices.put("A", 50);
+        prices.put("B", 30);
+        prices.put("C", 20);
+        prices.put("D", 15);
     }
 
     public Integer checkout(String skus) {
@@ -148,9 +154,3 @@ public class CheckoutSolution {
         });
     }
 }
-
-
-
-
-
-
