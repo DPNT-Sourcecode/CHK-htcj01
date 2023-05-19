@@ -52,15 +52,19 @@ class OrderUnit {
         return (offerTotal * timesAffected) + (remainingQuantity * price);
     }
 
-    public void setMatchedOffer(Offer matchedOffer) {
+    public boolean setMatchedOffer(Offer matchedOffer) {
         if (this.matchedOffer != null) {
             Integer total = getTotal();
             Integer candidate = computeTotal(matchedOffer);
             if (candidate < total) {
                 this.matchedOffer = matchedOffer;
+                return true;
             }
         } else {
             this.matchedOffer = matchedOffer;
+            return true;
         }
+        return false;
     }
 }
+

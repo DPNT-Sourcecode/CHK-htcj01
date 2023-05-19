@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,14 +37,15 @@ public class CheckoutSolution {
             return total - discount + (remaining * unit.getPrice());
         };
 
-        Function<OfferContext, Discount> discountFN = (ctx) -> {
+        Function<OfferContext, List<Discount>> discountFN = (ctx) -> {
             Offer offer = ctx.offer();
             OrderUnit unit = ctx.unit();
-            int remaining = unit.getQuantity() % offer.getQuantity();
             int timesToApply = unit.getQuantity() / offer.getQuantity();
-            int total = unit.getQuantity() * unit.getPrice();
-            int discount = timesToApply * unit.getPrice();
-            return new Discount(prices.get("B"));
+            List<Discount> discounts = new ArrayList<>();
+            for (int i = 0; i < timesToApply; i++) {
+                discounts.add(new Discount(prices.get("B"), "B"));
+            }
+            return discounts;
         };
         offers.add(new Offer("E", new OfferRule("B", 2), 80, discountFN));
     }
@@ -83,6 +85,7 @@ public class CheckoutSolution {
     }
 
     private void assignOffers(Map<String, OrderUnit>  units){
+        List<Discount> discounts = new ArrayList<>();
         offers.forEach(offer -> {
             OrderUnit unit = units.get(offer.getSku());
             if (unit != null && offer.isSatisfiedBy(unit)) {
@@ -91,4 +94,5 @@ public class CheckoutSolution {
         });
     }
 }
+
 
