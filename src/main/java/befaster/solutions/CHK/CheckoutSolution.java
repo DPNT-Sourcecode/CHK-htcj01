@@ -19,9 +19,6 @@ public class CheckoutSolution {
 
         private final Integer price;
 
-        /**
-         * Represents offers that matched with this OrderUnit
-         */
         private final List<Offer> matchedOffers = new ArrayList<>();
 
         public OrderUnit(String sku, Integer quantity, Integer price) {
@@ -162,7 +159,8 @@ public class CheckoutSolution {
 
     //Checks for matching Offers and return a list of OrderUnit with those that matched and those that didn't split in different instances
     public static List<OrderUnit> processOrder(Collection<OrderUnit> units) {
-        return List.of(units);
+
+        return new ArrayList<>(units);
     }
 
     public static Map<String, OrderUnit> parseSKUs(String skus) {
@@ -194,4 +192,3 @@ public class CheckoutSolution {
         return 0;
     }
 }
-
