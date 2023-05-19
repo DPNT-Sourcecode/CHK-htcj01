@@ -97,6 +97,10 @@ public class CheckoutSolution {
         private final Map<String, OfferRule> rules = new HashMap<>();
         private final Integer finalPrice;
 
+        public Offer(OfferRule rule, Integer finalPrice) {
+            this(List.of(new OfferRule[]{rule}), finalPrice);
+        }
+
         public Offer(List<OfferRule> offerRules, Integer finalPrice) {
             //Only allow 1 condition per SKU
             offerRules.forEach(rule -> {
@@ -144,7 +148,8 @@ public class CheckoutSolution {
         prices.put("C", 20);
         prices.put("D", 15);
 
-        Offer offerA = new Offer();
+        offers.add(new Offer(new OfferRule("A", 3), 130));
+        offers.add(new Offer(new OfferRule("B", 2), 45));
     }
 
     public Integer checkout(String skus) {
@@ -181,4 +186,5 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
