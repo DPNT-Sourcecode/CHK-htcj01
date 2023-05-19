@@ -13,6 +13,7 @@ class OrderUnit {
     private final Integer price;
 
     private Offer matchedOffer = null;
+    private List<Offer> offerCandidates = new ArrayList<>();
     private List<Discount> discounts = new ArrayList<>();
 
     public OrderUnit(String sku, Integer quantity, Integer price) {
@@ -68,6 +69,7 @@ class OrderUnit {
     }
 
     public boolean setMatchedOffer(Offer matchedOffer) {
+        this.offerCandidates.add(matchedOffer);
         if (this.matchedOffer != null) {
             Integer total = getTotal();
             Integer candidate = computeTotal(matchedOffer);
@@ -82,5 +84,6 @@ class OrderUnit {
         return false;
     }
 }
+
 
 
