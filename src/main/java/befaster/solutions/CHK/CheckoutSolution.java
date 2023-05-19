@@ -31,6 +31,19 @@ public class CheckoutSolution {
         }
     }
 
+    /**
+     * Represents the result of a check
+     * It can internally represent OrderUnit that matched with an Offer
+     * and its remaining items that didn't matched.
+     */
+    static class OfferRuleCheck {
+        List<OrderUnit> matched = new ArrayList<>();
+        List<OrderUnit> unmatched = new ArrayList<>();
+
+        public void addMatched(OrderUnit unit){ this.matched.add(unit);}
+        public void addUnMatched(OrderUnit unit){ this.matched.add(unit);}
+    }
+
     static class OfferRule {
         private final String sku;
         private final Integer quantity;
@@ -88,13 +101,14 @@ public class CheckoutSolution {
          * @return
          */
         boolean isSatisfiedBy(List<OrderUnit> orderUnits){
+            //NOTE: This method shouldn't return a boolean
+            //If there are matches this method should return a new List of OrderUnit.
             orderUnits.forEach(unit -> {
                 OfferRule rule = rules.get(unit.sku);
                 //The unit can match with a same offer multiple times.
                 //How can we handle it?
                 //We can create a class to represent how many times it matched.
                 Boolean isSatisfied = rule.isSatisfiedBy(unit);
-
             });
             return false;
         }
@@ -132,6 +146,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
