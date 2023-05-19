@@ -38,7 +38,7 @@ public class CheckoutSolution {
         public Integer getTotal() {
             Integer offerTotal = 0;
             Integer timesAffected = 0;
-            Integer remainingQuantity = 0;
+            Integer remainingQuantity = this.quantity;
             if (this.matchedOffer != null ) {
                 offerTotal = this.matchedOffer != null? this.matchedOffer.finalPrice : 0;
                 timesAffected = (this.quantity / this.matchedOffer.getQuantity());
@@ -149,7 +149,7 @@ public class CheckoutSolution {
 
         Map<String, OrderUnit> orderUnits = new HashMap<>();
         parsedSKus.entrySet().forEach(entry -> {
-            orderUnits.put(entry.getKey(), new OrderUnit(entry.getKey(), entry.getValue().size(), prices.get(entry.getKey())));
+            orderUnits.put(entry.getKey(), new OrderUnit(entry.getKey(), entry.getValue().size(), prices.getOrDefault(entry.getKey(), 0)));
         });
         return orderUnits;
     }
@@ -163,6 +163,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 

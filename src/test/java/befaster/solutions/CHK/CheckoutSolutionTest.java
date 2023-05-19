@@ -19,6 +19,13 @@ class CheckoutSolutionTest {
      */
 
     @Test
+    public void shouldIgnoreUnmappedSKU() {
+        CheckoutSolution checkout = new CheckoutSolution();
+        Integer total = checkout.checkout("A,A,B,C,D,F");
+        Assertions.assertEquals(165, total);
+    }
+
+    @Test
     public void shouldSumSkusWithoutMatchAnyOffer() {
         CheckoutSolution checkout = new CheckoutSolution();
         Integer total = checkout.checkout("A,A,B,C,D");
@@ -37,6 +44,7 @@ class CheckoutSolutionTest {
         CheckoutSolution checkout = new CheckoutSolution();
         Assertions.assertEquals(260, checkout.checkout("A,A,A,A,A,A"));
         Assertions.assertEquals(305, checkout.checkout("A,A,A,A,A,A,B,B"));
+        Assertions.assertEquals(325, checkout.checkout("A,A,A,A,A,A,B,B,C"));
     }
 
     @Test
@@ -60,5 +68,6 @@ class CheckoutSolutionTest {
     }
 
 }
+
 
 
