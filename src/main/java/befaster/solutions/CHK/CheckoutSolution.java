@@ -39,7 +39,7 @@ public class CheckoutSolution {
         }
 
         public Integer getTotal() {
-            if (offers.size() > 0) return offers.stream().mapToInt(Offer::getFinalPrice).sum();
+            if (this.matchedOffers.size() > 0) return offers.stream().mapToInt(Offer::getFinalPrice).sum();
             return quantity * price;
         }
     }
@@ -162,7 +162,7 @@ public class CheckoutSolution {
 
     //Checks for matching Offers and return a list of OrderUnit with those that matched and those that didn't split in different instances
     public static List<OrderUnit> processOrder(Collection<OrderUnit> units) {
-        return null;
+        return List.of(units);
     }
 
     public static Map<String, OrderUnit> parseSKUs(String skus) {
@@ -194,3 +194,4 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
