@@ -10,19 +10,6 @@ import java.util.stream.Collectors;
 
 public class CheckoutSolution {
 
-    /**
-     * Represents the result of a check
-     * It can internally represent OrderUnit that matched with an Offer
-     * and its remaining items that didn't matched.
-     */
-    static class OfferRuleCheckResult {
-        List<OrderUnit> matched = new ArrayList<>();
-        List<OrderUnit> unmatched = new ArrayList<>();
-
-        public void addMatched(OrderUnit unit){ this.matched.add(unit);}
-        public void addUnMatched(OrderUnit unit){ this.matched.add(unit);}
-    }
-
     private final static List<Offer> offers = new ArrayList<>();
     private final static Map<String, Integer> prices = new HashMap<>();
 
@@ -38,6 +25,7 @@ public class CheckoutSolution {
         offers.add(new Offer("A", new OfferRule("A", 5), 200));
         offers.add(new Offer("B", new OfferRule("B", 2), 45));
 
+        //This won't work. It should have the B free
         Function<OfferContext, Integer> discountFN = (ctx) -> {
             Offer offer = ctx.offer();
             OrderUnit unit = ctx.unit();
