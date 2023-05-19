@@ -137,13 +137,21 @@ public class CheckoutSolution {
 
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
+        Map<String, OrderUnit>  orderUnits = parseSKUs(skus);
+        return 0;
+    }
+
+    public static Map<String, OrderUnit> parseSKUs(String skus) {
         Map<String, List<String>> parsedSKus = Arrays
                                                 .asList(skus.split(","))
                                                     .stream()
                                                     .collect(Collectors.groupingBy(item -> item));
-        Map<String, List<String>> orderUnits = parsedSKus.entrySet().stream().map((entry) -> )
 
-
+        Map<String, OrderUnit> orderUnits = new HashMap<>();
+        parsedSKus.entrySet().forEach(entry -> {
+            orderUnits.put(entry.getKey(), new OrderUnit(entry.getKey(), entry.getValue().size(), prices.get(entry.getKey())));
+        });
+        return orderUnits;
     }
 
     /**

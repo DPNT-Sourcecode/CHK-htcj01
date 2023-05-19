@@ -3,6 +3,8 @@ package befaster.solutions.CHK;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckoutSolutionTest {
@@ -21,6 +23,12 @@ class CheckoutSolutionTest {
         CheckoutSolution checkout = new CheckoutSolution();
         Integer total = checkout.checkout("A,B,C,D");
         Assertions.assertEquals(115, total);
+    }
+
+    @Test
+    public void shouldTransformSkusToOrderUnits() {
+        Map<String, CheckoutSolution.OrderUnit> result = CheckoutSolution.parseSKUs("A");
+        Assertions.assertEquals(result.size(), 1);
     }
 
 }
