@@ -12,11 +12,17 @@ class CheckoutSolutionTest {
 
     /**
      * Test List:
+     *
+     * Part 1:
      *  - [checkout] A simple scenario with skus won't match any Offer
      *  - [checkout] A scenario where skus will match a single offer
      *  - [checkout] A scenario where skus will match multiple offers
      *  - [checkout] A scenario where the quantity of skus will match an Offer twice
      *  - [checkout] A scenario where the skus will match an offer twice with remaining items. (e.g size: 7 should match twice and have 1 item left)
+     *
+     * Part 2:
+     * - [checkout] Should prioritize the most beneficial offer to the user (e.g AAAAA = 200)
+     * - [checkout] Should give a discount in the remaining item
      */
 
     @Test
