@@ -58,13 +58,13 @@ class CheckoutSolutionTest {
 
 //        Assertions.assertEquals(330, checkout.checkout("AAAAAAAA"));
 //        Assertions.assertEquals(380, checkout.checkout("AAAAAAAAA"));
-//        Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
 
-        //Prob. Is failing the discount part
-        //AA B(B) CC DD EE
-        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE"));
+        //AAAAA = 200, EE = 80 (B), AAA=130, BB=60
+        Assertions.assertEquals(455, checkout.checkout("AAAAAEEBAAABB"));
+
+//        Assertions.assertEquals(280, checkout.checkout("ABCDEABCDE"));
 //        Assertions.assertEquals(280, checkout.checkout("CCADDEEBBA"));
-
+//
 //        Assertions.assertEquals(400, checkout.checkout("AAAAAAAAAA"));
 //        Assertions.assertEquals(445, checkout.checkout("AAAAAAAAAABB"));
 //        Assertions.assertEquals(465, checkout.checkout("AAAAAAAAAABBC"));
@@ -112,5 +112,3 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(280, checkout.checkout("EEEEEEEB"));
     }
 }
-
-
