@@ -155,9 +155,10 @@ public class CheckoutSolution {
     private void assignOffers(Map<String, OrderUnit>  units){
         offers.forEach(offer -> {
             OrderUnit unit = units.get(offer.sku);
-            if (offer.isSatisfiedBy(unit)) {
+            if (unit != null && offer.isSatisfiedBy(unit)) {
                 unit.setMatchedOffer(offer);
             }
         });
     }
 }
+

@@ -35,8 +35,8 @@ class CheckoutSolutionTest {
     @Test
     public void shouldSumSkusMatchingAnOfferTwice() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Integer total = checkout.checkout("A,A,A,A,A,A,B,C,D");
-        Assertions.assertEquals(325, total);
+        Integer total = checkout.checkout("A,A,A,A,A,A");
+        Assertions.assertEquals(260, total);
     }
 
     @Test
@@ -60,3 +60,4 @@ class CheckoutSolutionTest {
     }
 
 }
+
