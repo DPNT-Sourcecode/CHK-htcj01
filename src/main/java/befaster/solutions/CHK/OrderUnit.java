@@ -41,6 +41,7 @@ class OrderUnit {
         if (offer != null && offer.isDynamic()) {
             return offer.computeFinalPrice(new OfferContext(this, offer));
         }
+        Integer fullTotal = this.quantity * this.getPrice();
         Integer offerTotal = 0;
         Integer timesAffected = 0;
         Integer remainingQuantity = this.quantity;
@@ -55,8 +56,10 @@ class OrderUnit {
              discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
          }
 
-        Integer bestTotal = discounts.size() > 0 && discount <= offerTotal? discount : offerTotal;
-        return bestTotal + (remainingQuantity * price) + discount;
+         if (discounts.size() > 0 && discount <= offerTotal) {
+            return offerTotal - discount;
+         }
+         return offerTotal + (remainingQuantity * price);
     }
 
     public void addDiscount(Discount discount){
@@ -78,4 +81,5 @@ class OrderUnit {
         return false;
     }
 }
+
 
