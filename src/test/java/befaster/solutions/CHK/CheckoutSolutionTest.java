@@ -91,5 +91,4 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(160, checkout.checkout("EEEEEE"));
         Assertions.assertEquals(240, checkout.checkout("EEEEEEE"));
     }
-
 }
