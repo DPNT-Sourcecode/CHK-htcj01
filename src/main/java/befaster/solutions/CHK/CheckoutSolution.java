@@ -23,7 +23,7 @@ public class CheckoutSolution {
         offers.add(new Offer("A", new OfferRule("A", 3), 130, null));
 
         offers.add(new Offer("A", new OfferRule("A", 5), 200, null));
-        offers.add(new Offer("B", new OfferRule("B", 2), 45, computeDiscountFN));
+        offers.add(new Offer("B", new OfferRule("B", 2), 45, null));
 
         //This won't work. It should have the B free
         Function<OfferContext, Integer> dynanmicPrice = (ctx) -> {
@@ -43,9 +43,9 @@ public class CheckoutSolution {
             int timesToApply = unit.getQuantity() / offer.getQuantity();
             int total = unit.getQuantity() * unit.getPrice();
             int discount = timesToApply * unit.getPrice();
-            return new Discount();
+            return new Discount(prices.get("B"));
         };
-        offers.add(new Offer("E", new OfferRule("B", 3), discountFN));
+        offers.add(new Offer("E", new OfferRule("B", 2), 80, discountFN));
     }
 
     public Integer checkout(String skus) {
@@ -91,3 +91,4 @@ public class CheckoutSolution {
         });
     }
 }
+

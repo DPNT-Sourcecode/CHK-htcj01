@@ -36,7 +36,7 @@ class Offer {
 
 
     public List<Discount> computeDiscounts(OfferContext ctx) {
-        return
+        return computeDiscounts(ctx);
     }
 
     public String getSku() {
@@ -63,3 +63,4 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
+

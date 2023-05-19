@@ -5,4 +5,14 @@ package befaster.solutions.CHK;
  */
 public class Discount {
 
+    private final Integer value;
+
+    public Discount(Integer value) {
+        this.value = value;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
 }
+
