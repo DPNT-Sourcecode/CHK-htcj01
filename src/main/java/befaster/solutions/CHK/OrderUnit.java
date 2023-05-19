@@ -57,7 +57,8 @@ class OrderUnit {
          }
 
          if (discounts.size() > 0 && discount <= offerTotal) {
-            return offerTotal - discount;
+             Integer totalWithDiscount = fullTotal + discount;
+            return totalWithDiscount < 0? 0 : totalWithDiscount;
          }
          return offerTotal + (remainingQuantity * price);
     }

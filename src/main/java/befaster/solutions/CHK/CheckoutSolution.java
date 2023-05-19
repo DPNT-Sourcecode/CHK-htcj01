@@ -43,7 +43,7 @@ public class CheckoutSolution {
             int timesToApply = unit.getQuantity() / offer.getQuantity();
             List<Discount> discounts = new ArrayList<>();
             for (int i = 0; i < timesToApply; i++) {
-                discounts.add(new Discount(prices.get("B"), "B"));
+                discounts.add(new Discount(prices.get("B") * -1, "B"));
             }
             return discounts;
         };
