@@ -37,7 +37,7 @@ public class CheckoutSolution {
 
         public Integer getTotal() {
             if (this.matchedOffers.size() > 0) {
-                Integer affectedItems = this.matchedOffers.stream().mapToInt(Offer:getQuantity());
+                this.matchedOffers.stream().mapToInt(Offer::getFinalPrice);
             }
             return quantity * price;
         }
@@ -194,4 +194,5 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
 
