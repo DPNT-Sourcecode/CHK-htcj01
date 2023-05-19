@@ -69,20 +69,22 @@ class OrderUnit {
          return offerTotal + (remainingQuantity * price);
     }
 
-    public Integer recursivelyComputeTotal() {
-        Integer fullTotal = this.quantity * this.getPrice();
+    public Integer recursivelyComputeTotal(int quantity) {
+        Offer offer = getOfferBasedOnQuantity(quantity);
+        Integer fullTotal = quantity * this.getPrice();
         Integer offerTotal = 0;
         Integer timesAffected = 0;
-        Integer remainingQuantity = this.quantity;
+        Integer remainingQuantity = quantity;
         if (offer != null) {
-            timesAffected = (this.quantity / offer.getQuantity());
+            timesAffected = (quantity / offer.getQuantity());
             offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
-            remainingQuantity = this.quantity % offer.getQuantity();
+            remainingQuantity = quantity % offer.getQuantity();
         }
+        return offerTotal + recursivelyComputeTotal(remainingQuantity);
     }
 
     private Offer getOfferBasedOnQuantity(int quantity) {
-        return this.offerCandidates.stream().filter( offer -> offer.getQuantity() >= quantity).sorted((prev, curr) -> prev.getQuantity() - curr.getQuantity()).findFirst();
+        return this.offerCandidates.stream().filter( offer -> offer.getQuantity() >= quantity).sorted((prev, curr) -> prev.getQuantity() - curr.getQuantity()).findFirst().orElse(null);
     }
 
     public void addDiscount(Discount discount){
@@ -105,3 +107,4 @@ class OrderUnit {
         return false;
     }
 }
+
