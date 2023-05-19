@@ -96,7 +96,7 @@ public class CheckoutSolution {
 
         discounts.forEach(discount -> {
             OrderUnit unit = units.get(discount.getSku());
-            unit.addDiscount(discount);
+            if (unit != null) unit.addDiscount(discount);
         });
     }
 }

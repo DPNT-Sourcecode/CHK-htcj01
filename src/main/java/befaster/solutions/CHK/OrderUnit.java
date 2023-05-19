@@ -49,7 +49,13 @@ class OrderUnit {
             timesAffected = (this.quantity / offer.getQuantity());
             remainingQuantity = this.quantity % offer.getQuantity();
         }
-        return (offerTotal * timesAffected) + (remainingQuantity * price);
+
+        Integer discount = 0;
+         if (this.discounts != null) {
+             discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
+         }
+
+        return (offerTotal * timesAffected) + (remainingQuantity * price) - discount;
     }
 
     public void addDiscount(Discount discount){
