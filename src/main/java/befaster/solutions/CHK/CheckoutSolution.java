@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CheckoutSolution {
@@ -143,6 +144,17 @@ public class CheckoutSolution {
         return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
     }
 
+    private boolean isAllSkuValid(List<String> skusList) {
+        Set<String> keys = prices.keySet();
+        boolean isValid = true;
+        for (String sku: skusList) {
+            if (!keys.contains(sku)){
+                isValid = false;
+                break;
+            }
+        }
+    }
+
     public static Map<String, OrderUnit> parseSKUs(List<String> skus) {
         Map<String, List<String>> parsedSKus = skus
                                                     .stream()
@@ -164,9 +176,3 @@ public class CheckoutSolution {
         });
     }
 }
-
-
-
-
-
-
