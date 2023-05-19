@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -89,7 +90,7 @@ class OrderUnit {
         return this.offerCandidates
                         .stream()
                         .filter( offer -> offer.getQuantity() <= quantity)
-                        .sorted((prev, curr) -> prev.getQuantity() - curr.getQuantity()).findFirst().orElse(null);
+                        .sorted(Comparator.comparingInt(Offer::getQuantity)).findFirst().orElse(null);
     }
 
     public void addDiscount(Discount discount){
@@ -112,4 +113,5 @@ class OrderUnit {
         return false;
     }
 }
+
 
