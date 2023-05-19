@@ -3,11 +3,29 @@ package befaster.solutions.CHK;
 import befaster.runner.SolutionNotImplementedException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CheckoutSolution {
+
+    /**
+     * Class to represent the SKU and quantity being ordered.
+     */
+    static class OrderUnit {
+        private final String sku;
+        private final Integer quantity;
+
+        public OrderUnit(String sku, Integer quantity) {
+            this.sku = sku;
+            this.quantity = quantity;
+        }
+
+        public String getSku() {
+            return sku;
+        }
+    }
 
     static class OfferCondition {
         private final String sku;
@@ -59,7 +77,7 @@ public class CheckoutSolution {
          * @param skuIds
          * @return
          */
-        boolean isSatisfiedBy(List<String> skuIds){
+        boolean isSatisfiedBy(List<OrderUnit> orderUnits){
             return false;
         }
 
@@ -74,7 +92,16 @@ public class CheckoutSolution {
     }
 
     public Integer checkout(String skus) {
-        throw new SolutionNotImplementedException();
+        if (skus == null) throw new IllegalArgumentException("Skus can't be null");
+        List<String> parsedSKus = Arrays.asList(skus.split(","));
+
+    }
+
+    private Integer checkMatchWithOffers(List<OrderUnit> orderUnits) {
+        offers.forEach(offer -> {
+            Boolean isSatisfied = offer.isSatisfiedBy(skus);
+        });
     }
 }
+
 
