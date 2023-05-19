@@ -16,6 +16,8 @@ public class CheckoutSolution {
         private final String sku;
         private final Integer quantity;
 
+        private final List<Offer> matchedOffers = new ArrayList<>();
+
         public OrderUnit(String sku, Integer quantity) {
             this.sku = sku;
             this.quantity = quantity;
@@ -23,6 +25,9 @@ public class CheckoutSolution {
 
         public String getSku() {
             return sku;
+        }
+        public Integer getTotal() {
+            return 0;
         }
     }
 
@@ -43,7 +48,7 @@ public class CheckoutSolution {
          * Method to identify if this specific condition is satisfied by the SKUs
          * Note: To be able to match a Condition twice, the Offer should be able to subtract the skus size.
          * This way we can apply the check recursively.
-         * @param skuIds
+         * @param unit
          * @return
          */
         boolean isSatisfiedBy(OrderUnit unit){
@@ -79,13 +84,16 @@ public class CheckoutSolution {
         /**
          * Iterates over the Offer conditions until identify there are no matching conditions.
          * If there are matching conditions, the final price is computed.
-         * @param skuIds
+         * @param orderUnits
          * @return
          */
         boolean isSatisfiedBy(List<OrderUnit> orderUnits){
             orderUnits.forEach(unit -> {
                 OfferRule rule = rules.get(unit.sku);
-                rule.isSatisfiedBy()
+                //The unit can match with a same offer multiple times.
+                //How can we handle it?
+                //We can create a class to represent how many times it matched.
+                Boolean isSatisfied = rule.isSatisfiedBy(unit);
 
             });
             return false;
@@ -93,6 +101,9 @@ public class CheckoutSolution {
 
         //TODO: We''l probably need a method to compute the price (probably a command class to represent it)
         //This way, we can ensure the class will consider the items that matched with Offers and those units that didn't.
+        public Integer apply() {
+            return finalPrice;
+        }
     }
 
     private final static List<Offer> offers = new ArrayList<>();
@@ -107,12 +118,21 @@ public class CheckoutSolution {
 
     }
 
+    /**
+     * Check for matches with the Offers
+     * This method will:
+     * - Check by matches
+     * - Split the Order Units by those that matched with Offers and the remaining items
+     * @param orderUnits
+     * @return
+     */
     private Integer checkMatchWithOffers(List<OrderUnit> orderUnits) {
         offers.forEach(offer -> {
             Boolean isSatisfied = offer.isSatisfiedBy(orderUnits);
         });
     }
 }
+
 
 
 
