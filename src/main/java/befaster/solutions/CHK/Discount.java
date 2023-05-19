@@ -6,13 +6,20 @@ package befaster.solutions.CHK;
 public class Discount {
 
     private final Integer value;
+    private final String sku;
 
-    public Discount(Integer value) {
+    public Discount(Integer value, String sku) {
         this.value = value;
+        this.sku = sku;
+    }
+
+    public String getSku() {
+        return sku;
     }
 
     public Integer getValue() {
         return value;
     }
 }
+
 
