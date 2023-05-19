@@ -74,4 +74,10 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(CheckoutSolution.parseSKUs(List.of("B")).get("B").getTotal(), 30);
     }
 
+    @Test
+    public void shouldPreferBestOffer() {
+        CheckoutSolution.OrderUnit unit = new CheckoutSolution.OrderUnit("A", 6, 50);
+        Assertions.assertEquals(unit.getTotal(), 260);
+    }
+
 }
