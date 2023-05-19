@@ -44,6 +44,10 @@ public class CheckoutSolution {
             }
             return offerTotal + ((quantity - offerAffected) * price);
         }
+
+        public void setMatchedOffer(Offer matchedOffer) {
+            this.matchedOffer = matchedOffer;
+        }
     }
 
     /**
@@ -91,13 +95,16 @@ public class CheckoutSolution {
      * this way is possible to create an Offer able to match a bundle of different SKUs.
      */
     static class Offer {
+
+        private final String sku;
         private final OfferRule rule;
         private final Integer finalPrice;
 
         //Testing if is simple to directly set how many items are affected by this offer.
         private final Integer quantity;
 
-        public Offer(OfferRule rule, Integer finalPrice, Integer quantity) {
+        public Offer(String sku, OfferRule rule, Integer finalPrice, Integer quantity) {
+            this.sku = sku;
             this.rule = rule;
             this.finalPrice = finalPrice;
             this.quantity = quantity;
@@ -131,8 +138,8 @@ public class CheckoutSolution {
         prices.put("C", 20);
         prices.put("D", 15);
 
-        offers.add(new Offer(new OfferRule("A", 3), 130, 3));
-        offers.add(new Offer(new OfferRule("B", 2), 45, 3));
+        offers.add(new Offer("A", new OfferRule("A", 3), 130, 3));
+        offers.add(new Offer("A", new OfferRule("B", 2), 45, 3));
     }
 
     public Integer checkout(String skus) {
@@ -161,28 +168,16 @@ public class CheckoutSolution {
         return orderUnits;
     }
 
-    /**
-     * Check for matches with the Offers
-     * This method will:
-     * - Check by matches
-     * - Split the Order Units by those that matched with Offers and the remaining items
-     * @param orderUnits
-     * @return
-     */
-    private Integer checkMatchWithOffers(List<OrderUnit> orderUnits) {
-
+    private void assignOffers(Map<String, OrderUnit>  units){
         offers.forEach(offer -> {
-            OfferRuleCheckResult result = offer.isSatisfiedBy(orderUnits);
-        });
-        return 0;
-    }
-
-    private void assignOffers(List<OrderUnit> units){
-        offers.forEach(offer -> {
-            offer.isSatisfiedBy(units);
+            OrderUnit unit = units.get(offer.sku);
+            if (offer.isSatisfiedBy(unit)) {
+                unit.setMatchedOffer(offer);
+            }
         });
     }
 }
+
 
 
 
