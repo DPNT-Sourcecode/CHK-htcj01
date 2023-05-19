@@ -92,6 +92,7 @@ class OrderUnit {
             timesAffected = (quantity / offer.getQuantity());
             if(offer.isDynamic()){
                 offerTotal = offer.computeFinalPrice(new OfferContext(this, offer));
+//                return offerTotal;
             } else {
                 offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
             }
