@@ -140,8 +140,9 @@ public class CheckoutSolution {
         Map<String, List<String>> parsedSKus = Arrays
                                                 .asList(skus.split(","))
                                                     .stream()
-                                                    .collect(Collectors.groupingBy(item -> item))
-                .entrySet().stream().map(entry -> {});
+                                                    .collect(Collectors.groupingBy(item -> item));
+        Map<String, List<String>> orderUnits = parsedSKus.entrySet().stream().map((entry) -> )
+
 
     }
 
@@ -159,4 +160,5 @@ public class CheckoutSolution {
         });
     }
 }
+
 
