@@ -28,8 +28,8 @@ class CheckoutSolutionTest {
     @Test
     public void shouldSumSkusMatchingSingleOffer() {
         CheckoutSolution checkout = new CheckoutSolution();
-        Integer total = checkout.checkout("A,A,B,C,D");
-        Assertions.assertEquals(165, total);
+        Integer total = checkout.checkout("A,A,A,B,C,D");
+        Assertions.assertEquals(195, total);
     }
 
     @Test

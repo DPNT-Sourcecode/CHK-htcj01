@@ -36,7 +36,9 @@ public class CheckoutSolution {
         }
 
         public Integer getTotal() {
-            if (this.matchedOffers.size() > 0) return offers.stream().mapToInt(Offer::getFinalPrice).sum();
+            if (this.matchedOffers.size() > 0) {
+                Integer affectedItems = this.matchedOffers.stream().mapToInt(Offer:getQuantity());
+            }
             return quantity * price;
         }
     }
@@ -192,3 +194,4 @@ public class CheckoutSolution {
         return 0;
     }
 }
+
