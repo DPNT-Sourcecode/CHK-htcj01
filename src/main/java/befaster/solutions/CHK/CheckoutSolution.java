@@ -121,12 +121,6 @@ public class CheckoutSolution {
        public Boolean isSatisfiedBy(OrderUnit unit){
             return this.rule.isSatisfiedBy(unit);
        }
-
-        //TODO: We''l probably need a method to compute the price (probably a command class to represent it)
-        //This way, we can ensure the class will consider the items that matched with Offers and those units that didn't.
-        public Integer apply() {
-            return finalPrice;
-        }
     }
 
     private final static List<Offer> offers = new ArrayList<>();
@@ -145,14 +139,8 @@ public class CheckoutSolution {
     public Integer checkout(String skus) {
         if (skus == null) throw new IllegalArgumentException("Skus can't be null");
         Map<String, OrderUnit>  orderUnits = parseSKUs(skus);
-        List<OrderUnit> processedOrder = processOrder(orderUnits.values());
-        return processedOrder.stream().mapToInt(OrderUnit::getTotal).sum();
-    }
-
-    //Checks for matching Offers and return a list of OrderUnit with those that matched and those that didn't split in different instances
-    public static List<OrderUnit> processOrder(Collection<OrderUnit> units) {
-
-        return new ArrayList<>(units);
+        assignOffers(orderUnits);
+        return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
     }
 
     public static Map<String, OrderUnit> parseSKUs(String skus) {
@@ -177,6 +165,7 @@ public class CheckoutSolution {
         });
     }
 }
+
 
 
 
