@@ -33,7 +33,8 @@ public class GroupOfferRule implements IOfferRule {
     }
 
     @Override
-    public Orderun isSatisfiedBy(List<OrderUnit> units) {
+    public RuleCheckResult isSatisfiedBy(List<OrderUnit> units) {
         return units.stream().filter(skus::contains).mapToInt(OrderUnit::getQuantity).sum() >= quantity;
     }
 }
+

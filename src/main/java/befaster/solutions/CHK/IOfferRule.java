@@ -8,5 +8,6 @@ public interface IOfferRule {
     String sku();
 
     Boolean isSatisfiedBy(OrderUnit unit);
-    Boolean isSatisfiedBy(List<OrderUnit> units);
+    RuleCheckResult isSatisfiedBy(List<OrderUnit> units);
 }
+

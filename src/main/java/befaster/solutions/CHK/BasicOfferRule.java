@@ -10,8 +10,9 @@ public record BasicOfferRule(String sku, Integer quantity) implements IOfferRule
     }
 
     @Override
-    public Boolean isSatisfiedBy(List<OrderUnit> units) {
-        return units.stream().mapToInt(OrderUnit::getQuantity).sum() >= quantity;
+    public RuleCheckResult isSatisfiedBy(List<OrderUnit> units) {
+        throw new IllegalStateException("Not Implemented");
     }
 }
+
 
