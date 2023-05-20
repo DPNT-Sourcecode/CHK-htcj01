@@ -85,6 +85,13 @@ class Offer {
          */
         GroupOfferRule offerRule = (GroupOfferRule) this.rule;
         RuleCheckResult checkResult = offerRule.isSatisfiedBy(units);
+        if (checkResult.isSatisfied()) {
+            //Should subtract the original units and extractBundles again
+            List<OrderUnit> remainingUnits = null;
+            extractBundle(remainingUnits);
+        }
+
+
         List<OrderUnit> orderUnits = units.stream().filter(unit -> this.rule.isSatisfiedBy(unit)).collect(Collectors.toList());
         String name = orderUnits.stream().map(OrderUnit::getSku).collect(Collectors.joining());
         //TODO: WIP
