@@ -101,10 +101,10 @@ class CheckoutSolutionTest {
         OrderUnit unit = new OrderUnit("A", 6, 50);
         Assertions.assertEquals(unit.getTotal(), 300);
 
-        unit.setMatchedOffer(new Offer("A", new OfferRule("A", 3), 130, null));
+        unit.setMatchedOffer(new Offer("A", new BasicOfferRule("A", 3), 130, null));
         Assertions.assertEquals(unit.getTotal(), 260);
 
-        unit.setMatchedOffer(new Offer("A", new OfferRule("A", 5), 200, null));
+        unit.setMatchedOffer(new Offer("A", new BasicOfferRule("A", 5), 200, null));
         Assertions.assertEquals(unit.getTotal(), 250);
     }
 

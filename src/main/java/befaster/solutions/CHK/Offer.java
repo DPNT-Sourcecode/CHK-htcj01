@@ -13,13 +13,13 @@ import java.util.function.Function;
 class Offer {
 
     private final String sku;
-    private final OfferRule rule;
+    private final BasicOfferRule rule;
     private final Integer finalPrice;
     private final Function<OfferContext, Integer> dynamicPriceFN;
 
     private final Function<OfferContext, List<Discount>> computeDiscountFN;
 
-    public Offer(String sku, OfferRule rule, Integer finalPrice, Function<OfferContext, List<Discount>> computeDiscountFN) {
+    public Offer(String sku, BasicOfferRule rule, Integer finalPrice, Function<OfferContext, List<Discount>> computeDiscountFN) {
         this.sku = sku;
         this.rule = rule;
         this.finalPrice = finalPrice;
@@ -27,7 +27,7 @@ class Offer {
         this.dynamicPriceFN = null;
     }
 
-    public Offer(String sku, OfferRule rule, Function<OfferContext, Integer> dynamicPriceFN, Function<OfferContext, List<Discount>> computeDiscountFN) {
+    public Offer(String sku, BasicOfferRule rule, Function<OfferContext, Integer> dynamicPriceFN, Function<OfferContext, List<Discount>> computeDiscountFN) {
         this.sku = sku;
         this.rule = rule;
         this.dynamicPriceFN = dynamicPriceFN;
@@ -44,7 +44,7 @@ class Offer {
     }
 
     public Integer getQuantity() {
-        return rule.getQuantity();
+        return rule.quantity();
     }
 
     public Integer getFinalPrice() {
@@ -63,3 +63,4 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 }
+

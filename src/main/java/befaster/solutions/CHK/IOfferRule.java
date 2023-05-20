@@ -1,9 +1,10 @@
 package befaster.solutions.CHK;
 
 public interface IOfferRule {
-    Integer getQuantity();
+    Integer quantity();
 
-    String getSku();
+    String sku();
 
     Boolean isSatisfiedBy(OrderUnit unit);
 }
+
