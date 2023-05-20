@@ -120,6 +120,14 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(20, checkout.checkout("FFF"));
         Assertions.assertEquals(30, checkout.checkout("FFFF"));
         Assertions.assertEquals(695, checkout.checkout("FFABCDECBAABCABBAAAEEAAFF"));
+    }
 
+    @Test
+    public void shouldApplyOffers() {
+        CheckoutSolution checkout = new CheckoutSolution();
+        Assertions.assertEquals(45, checkout.checkout("HHHHH"));
+        Assertions.assertEquals(80, checkout.checkout("HHHHHHHHHH"));
+        Assertions.assertEquals(125, checkout.checkout("HHHHHHHHHHHHHHH"));
+        Assertions.assertEquals(135, checkout.checkout("HHHHHHHHHHHHHHHH"));
     }
 }
