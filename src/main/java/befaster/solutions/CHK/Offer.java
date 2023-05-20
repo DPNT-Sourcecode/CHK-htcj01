@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -105,7 +106,7 @@ class Offer {
                 - When is higher, subtract the quantity from the acc and run the same method with the remaining.
     */
     private AffectedOrderUnitsResult computeAffectedOrderUnits(List<OrderUnit> units, RuleCheckResult checkResult){
-        List<OrderUnit> matched = checkResult.getMatched();
+        List<OrderUnit> matched = checkResult.getMatched().stream().sorted(Comparator.comparingInt(OrderUnit::getPrice).reversed()).toList();
         List<OrderUnit> acc = new ArrayList<>();
         List<OrderUnit> bundles = new ArrayList<>();
         List<OrderUnit> remaining = new ArrayList<>();
@@ -167,3 +168,4 @@ class Offer {
         }
     }
 }
+
