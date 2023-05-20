@@ -84,10 +84,11 @@ class Offer {
             - Return a list of units covering the combination of items to apply the offer (Maybe return discounts?)
          */
         GroupOfferRule offerRule = (GroupOfferRule) this.rule;
-        offerRule.isSatisfiedBy(units);
+        RuleCheckResult checkResult = offerRule.isSatisfiedBy(units);
         List<OrderUnit> orderUnits = units.stream().filter(unit -> this.rule.isSatisfiedBy(unit)).collect(Collectors.toList());
         String name = orderUnits.stream().map(OrderUnit::getSku).collect(Collectors.joining());
         //TODO: WIP
         return new OrderUnit(name, 3, 45);
     }
 }
+
