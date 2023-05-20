@@ -195,5 +195,6 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(62, checkout.checkout("SSTX"));
         Assertions.assertEquals(112, checkout.checkout("SSTXA"));
         Assertions.assertEquals(112, checkout.checkout("ASSTX"));
+        Assertions.assertEquals(175, checkout.checkout("SSTAAA"));
     }
 }
