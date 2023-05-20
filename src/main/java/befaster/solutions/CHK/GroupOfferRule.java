@@ -6,8 +6,10 @@ import java.util.List;
 public class GroupOfferRule implements IOfferRule {
 
     private final List<String> skus = new ArrayList<>();
+    private Integer quantity;
 
-    public GroupOfferRule(String... ids, Integer quantity) {
+    public GroupOfferRule(Integer quantity, String... ids) {
+        this.quantity = quantity;
         this.skus.addAll(List.of(ids));
     }
 
@@ -26,3 +28,4 @@ public class GroupOfferRule implements IOfferRule {
         return null;
     }
 }
+
