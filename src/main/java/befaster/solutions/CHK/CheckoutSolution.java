@@ -1,6 +1,5 @@
 package befaster.solutions.CHK;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,7 @@ public class CheckoutSolution {
     private final static List<Offer> offers = new ArrayList<>();
     private final static Map<String, Integer> prices = new HashMap<>();
 
-    public static final Function<OfferContext, Integer> DYNANMIC_PRICE = (ctx) -> {
+    public static final Function<OfferContext, Integer> BUY_SOME_GET_X_FREE = (ctx) -> {
         Offer offer = ctx.offer();
         OrderUnit unit = ctx.unit();
         int remaining = unit.getQuantity() % offer.getQuantity() - 1;
@@ -25,7 +24,7 @@ public class CheckoutSolution {
         return total - discount + (remaining * unit.getPrice());
     };
 
-    public static final Function<OfferContext, List<Discount>> DISCOUNT_FN = (ctx) -> {
+    public static final Function<OfferContext, List<Discount>> DISCOUNT_TO_ANOTHER_SKU_FN = (ctx) -> {
         Offer offer = ctx.offer();
         OrderUnit unit = ctx.unit();
         int timesToApply = unit.getQuantity() / offer.getQuantity();
@@ -35,6 +34,19 @@ public class CheckoutSolution {
         }
         return discounts;
     };
+
+    public static Function<OfferContext, List<Discount>> createDiscountToSku(String SKU) {
+        return (ctx) -> {
+            Offer offer = ctx.offer();
+            OrderUnit unit = ctx.unit();
+            int timesToApply = unit.getQuantity() / offer.getQuantity();
+            List<Discount> discounts = new ArrayList<>();
+            for (int i = 0; i < timesToApply; i++) {
+                discounts.add(new Discount(prices.get(SKU) * -1, SKU));
+            }
+            return discounts;
+        };
+    }
 
     static {
         prices.put("A", 50); prices.put("B", 30); prices.put("C", 20);
@@ -50,8 +62,21 @@ public class CheckoutSolution {
         offers.add(new Offer("A", new OfferRule("A", 3), 130, null));
         offers.add(new Offer("A", new OfferRule("A", 5), 200, null));
         offers.add(new Offer("B", new OfferRule("B", 2), 45, null));
-        offers.add(new Offer("E", new OfferRule("B", 2), 80, DISCOUNT_FN));
-        offers.add(new Offer("F", new OfferRule("F", 3), DYNANMIC_PRICE, null));
+        offers.add(new Offer("E", new OfferRule("E", 2), 80, createDiscountToSku("B")));
+        offers.add(new Offer("F", new OfferRule("F", 3), BUY_SOME_GET_X_FREE, null));
+
+        //New Offers
+        offers.add(new Offer("H", new OfferRule("H", 5), 45, null));
+        offers.add(new Offer("H", new OfferRule("H", 10), 80, null));
+        offers.add(new Offer("K", new OfferRule("K", 2), 150, null));
+        offers.add(new Offer("N", new OfferRule("N", 3), 40, createDiscountToSku("M")));
+        offers.add(new Offer("P", new OfferRule("P", 5), 200, null));
+        offers.add(new Offer("Q", new OfferRule("Q", 3), 80, null));
+        offers.add(new Offer("R", new OfferRule("R", 3), 150, createDiscountToSku("Q")));
+        offers.add(new Offer("U", new OfferRule("U", 3), BUY_SOME_GET_X_FREE, null));
+        offers.add(new Offer("V", new OfferRule("V", 2),  90, null));
+        offers.add(new Offer("V", new OfferRule("V", 3),  130, null));
+
     }
 
     public Integer checkout(String skus) {
@@ -104,4 +129,5 @@ public class CheckoutSolution {
         });
     }
 }
+
 
