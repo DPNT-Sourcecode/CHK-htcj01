@@ -27,6 +27,3 @@ public class RuleCheckResult {
         return unmatched;
     }
 }
-
-
-

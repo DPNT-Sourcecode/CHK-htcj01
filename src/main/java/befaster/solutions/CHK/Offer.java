@@ -98,5 +98,3 @@ class Offer {
         return null;
     }
 }
-
-

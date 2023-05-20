@@ -51,6 +51,3 @@ public class GroupOfferRule implements IOfferRule {
         return new RuleCheckResult(totalMatched >= this.quantity, matched, unmatched);
     }
 }
-
-
-

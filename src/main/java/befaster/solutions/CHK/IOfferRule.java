@@ -10,4 +10,3 @@ public interface IOfferRule {
     Boolean isSatisfiedBy(OrderUnit unit);
     RuleCheckResult isSatisfiedBy(List<OrderUnit> units);
 }
-

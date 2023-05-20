@@ -15,4 +15,3 @@ public record BasicOfferRule(String sku, Integer quantity) implements IOfferRule
     }
 }
 
-
