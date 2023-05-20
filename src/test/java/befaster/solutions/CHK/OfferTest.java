@@ -31,7 +31,7 @@ class OfferTest {
 
         List<OrderUnit> units = result.getUnits();
         assertEquals(units.size(), 2);
-        assertEquals(units.stream().findFirst().get().getSku(), "STX");
+        assertEquals(units.stream().findFirst().get().getSku(), "ST");
         assertEquals(units.stream().findFirst().get().getPrice(), 45);
     }
 }

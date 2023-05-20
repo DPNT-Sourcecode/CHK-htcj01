@@ -113,6 +113,8 @@ class Offer {
             if (counter + unit.getQuantity() <= expectedQuantity){
                 acc.add(unit);
                 counter += unit.getQuantity();
+            } else {
+                remaining.add(unit);
             }
         }
 
