@@ -146,7 +146,7 @@ class Offer {
                 }
             }
         }
-        return new AffectedOrderUnitsResult(new OrderUnit(unitName, currentQuantity, this.finalPrice), remaining);
+        return new AffectedOrderUnitsResult(new OrderUnit(unitName, 1, this.finalPrice), remaining);
     }
 
     static class AffectedOrderUnitsResult {
@@ -159,3 +159,4 @@ class Offer {
         }
     }
 }
+
