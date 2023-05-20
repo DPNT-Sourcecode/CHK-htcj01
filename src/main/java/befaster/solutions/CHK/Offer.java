@@ -89,6 +89,7 @@ class Offer {
         if (checkResult.isSatisfied()) {
             //Should subtract the original units and extractBundles again
             AffectedOrderUnitsResult result = computeAffectedOrderUnits(checkResult.getMatched(), checkResult);
+            response.add(result.unit);
             response.merge(extractBundle(result.remaining));
         }
         return response;
@@ -114,7 +115,6 @@ class Offer {
             }
         }
 
-
         int currentQuantity = 0;
         String unitName = "";
         while (currentQuantity < expectedQuantity) {
@@ -128,17 +128,17 @@ class Offer {
                 }
             }
         }
-
-        return null;
+        return new AffectedOrderUnitsResult(new OrderUnit(unitName, currentQuantity, this.finalPrice), remaining);
     }
 
     static class AffectedOrderUnitsResult {
-        private List<OrderUnit> units;
+        private OrderUnit unit;
         private List<OrderUnit> remaining;
 
-        public AffectedOrderUnitsResult(List<OrderUnit> units, List<OrderUnit> remaining) {
-            this.units = units;
+        public AffectedOrderUnitsResult(OrderUnit unit, List<OrderUnit> remaining) {
+            this.unit = unit;
             this.remaining = remaining;
         }
     }
 }
+
