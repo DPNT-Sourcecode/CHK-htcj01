@@ -39,9 +39,9 @@ class OrderUnit {
         Integer computedQuantity = (this.quantity - this.discounts.size() > 0)? this.quantity - this.discounts.size() : 0;
         Integer computedTotal = recursivelyComputeTotal(computedQuantity);
         Integer discount = 0;
-        if (this.discounts != null) {
-            discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
-        }
+//        if (this.discounts != null) {
+//            discount = this.discounts.stream().mapToInt(Discount::getValue).sum();
+//        }
 
 //        if (discounts.size() > 0 && discount <= computedTotal) {
 //            Integer totalWithDiscount = computedTotal + discount;
@@ -92,7 +92,7 @@ class OrderUnit {
             timesAffected = (quantity / offer.getQuantity());
             if(offer.isDynamic()){
                 offerTotal = offer.computeFinalPrice(new OfferContext(this, offer));
-//                return offerTotal;
+                return offerTotal;
             } else {
                 offerTotal = (offer != null ? offer.getFinalPrice() : 0) * timesAffected;
             }
@@ -128,4 +128,3 @@ class OrderUnit {
         return false;
     }
 }
-

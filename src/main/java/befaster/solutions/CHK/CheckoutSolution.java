@@ -22,11 +22,10 @@ public class CheckoutSolution {
         prices.put("E", 40);
         prices.put("F", 10);
 
-        //This won't work. It should have the B free
         Function<OfferContext, Integer> dynanmicPrice = (ctx) -> {
             Offer offer = ctx.offer();
             OrderUnit unit = ctx.unit();
-            int remaining = unit.getQuantity() % offer.getQuantity();
+            int remaining = unit.getQuantity() % offer.getQuantity() -1;
             int timesToApply = unit.getQuantity() / offer.getQuantity();
             int total = unit.getQuantity() * unit.getPrice();
             int discount = timesToApply * unit.getPrice();
