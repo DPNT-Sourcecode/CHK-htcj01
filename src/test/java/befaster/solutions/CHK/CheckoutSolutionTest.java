@@ -129,5 +129,10 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(80, checkout.checkout("HHHHHHHHHH"));
         Assertions.assertEquals(125, checkout.checkout("HHHHHHHHHHHHHHH"));
         Assertions.assertEquals(135, checkout.checkout("HHHHHHHHHHHHHHHH"));
+
+        Assertions.assertEquals(15, checkout.checkout("M"));
+        Assertions.assertEquals(40, checkout.checkout("NNNM"));
+
+        Assertions.assertEquals(120, checkout.checkout("UUUU"));
     }
 }
