@@ -132,6 +132,7 @@ class Offer {
         while (currentQuantity < expectedQuantity) {
             for (OrderUnit unit : acc) {
                 if (currentQuantity == expectedQuantity) {
+                    remaining.add(unit);
                     continue;
                 }
                 int diffToComplete = expectedQuantity - currentQuantity;
@@ -166,4 +167,5 @@ class Offer {
         }
     }
 }
+
 
