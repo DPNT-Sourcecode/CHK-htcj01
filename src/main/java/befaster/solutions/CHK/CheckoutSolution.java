@@ -123,7 +123,7 @@ public class CheckoutSolution {
                 List<OrderUnit> bundleUnits = bundle.getUnits();
 //                //Note: We can internally change each OrderUnit quantity, but the best is to let it Immutable.
 //                //So, we should return a new Map instead of change it.
-                result = bundleUnits.stream().collect(Collectors.toMap(OrderUnit::getSku, (item) -> item));
+                result = bundleUnits.stream().filter(unit -> unit.getQuantity() > 0).collect(Collectors.toMap(OrderUnit::getSku, (item) -> item));
             } else {
                 OrderUnit unit = units.get(offer.getSku());
                 if (unit != null && offer.isSatisfiedBy(unit)) {
@@ -140,3 +140,4 @@ public class CheckoutSolution {
         return result;
     }
 }
+
