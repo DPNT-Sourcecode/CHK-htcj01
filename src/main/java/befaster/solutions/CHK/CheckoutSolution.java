@@ -119,11 +119,11 @@ public class CheckoutSolution {
         Map<String, OrderUnit> result = units;
         for (Offer offer : offers) {
             if (offer.isGroupOffer()){
-//                OfferBundleResult bundle = offer.extractBundle(new ArrayList<>(units.values()));
-//                List<OrderUnit> bundleUnits = bundle.getUnits();
+                OfferBundleResult bundle = offer.extractBundle(new ArrayList<>(units.values()));
+                List<OrderUnit> bundleUnits = bundle.getUnits();
 //                //Note: We can internally change each OrderUnit quantity, but the best is to let it Immutable.
 //                //So, we should return a new Map instead of change it.
-//                result = bundleUnits.stream().collect(Collectors.toMap(OrderUnit::getSku, (item) -> item));
+                result = bundleUnits.stream().collect(Collectors.toMap(OrderUnit::getSku, (item) -> item));
             } else {
                 OrderUnit unit = units.get(offer.getSku());
                 if (unit != null && offer.isSatisfiedBy(unit)) {

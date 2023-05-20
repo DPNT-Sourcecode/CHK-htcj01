@@ -182,7 +182,9 @@ class CheckoutSolutionTest {
             - S(1) STX(3)
 
     */
+    @Test
     public void shouldApplyBundleOffers() {
-
+        CheckoutSolution checkout = new CheckoutSolution();
+        Assertions.assertEquals(45, checkout.checkout("STX"));
     }
 }
