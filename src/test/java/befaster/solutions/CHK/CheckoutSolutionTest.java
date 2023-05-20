@@ -188,6 +188,10 @@ class CheckoutSolutionTest {
          - {"method":"checkout","params":["K"],"id":"CHK_R5_013"}, expected: 70, got: 80
          - {"method":"checkout","params":["ABCDEFGHIJKLMNOPQRSTUVW"],"id":"CHK_R5_033"}, expected: 795, got: 805
          - {"method":"checkout","params":["K"],"id":"CHK_R5_095"}, expected: 70, got: 80
+
+         - {"method":"checkout","params":["KK"],"id":"CHK_R5_096"}, expected: 120, got: 150
+         - {"method":"checkout","params":["KKK"],"id":"CHK_R5_097"}, expected: 190, got: 220
+         - {"method":"checkout","params":["KKKK"],"id":"CHK_R5_098"}, expected: 240, got: 300
          */
         CheckoutSolution checkout = new CheckoutSolution();
         Assertions.assertEquals(45, checkout.checkout("STX"));
@@ -201,5 +205,9 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(112, checkout.checkout("SSTXA"));
         Assertions.assertEquals(112, checkout.checkout("ASSTX"));
         Assertions.assertEquals(175, checkout.checkout("SSTAAA"));
+
+        Assertions.assertEquals(120, checkout.checkout("KK"));
+        Assertions.assertEquals(190, checkout.checkout("KKK"));
+        Assertions.assertEquals(240, checkout.checkout("KKKK"));
     }
 }
