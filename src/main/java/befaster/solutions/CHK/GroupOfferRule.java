@@ -2,6 +2,7 @@ package befaster.solutions.CHK;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GroupOfferRule implements IOfferRule {
 
@@ -29,12 +30,23 @@ public class GroupOfferRule implements IOfferRule {
 
     @Override
     public Boolean isSatisfiedBy(OrderUnit unit) {
-        return isSatisfiedBy(List.of(unit));
+        return isSatisfiedBy(List.of(unit)).isSatisfied();
     }
 
     @Override
     public RuleCheckResult isSatisfiedBy(List<OrderUnit> units) {
-        return units.stream().filter(skus::contains).mapToInt(OrderUnit::getQuantity).sum() >= quantity;
+        List<OrderUnit> matched = new ArrayList<>();
+        List<OrderUnit> unmatched = new ArrayList<>();
+
+        units.forEach(unit -> {
+            if (skus.contains(unit.getSku()) && unit.getQuantity() > 0){
+                matched.add(unit);
+            } else {
+                unmatched.add(unit);
+            }
+        });
+        return new RuleCheckResult(matched, unmatched);
     }
 }
+
 

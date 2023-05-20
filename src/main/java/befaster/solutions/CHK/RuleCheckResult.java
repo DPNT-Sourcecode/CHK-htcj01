@@ -5,18 +5,16 @@ import java.util.List;
 
 public class RuleCheckResult {
 
-    private final boolean isSatisfied;
     private final List<OrderUnit> matched = new ArrayList<>();
     private final List<OrderUnit> unmatched = new ArrayList<>();
 
-    public RuleCheckResult(boolean isSatisfied, List<OrderUnit> matched, List<OrderUnit> unmatched) {
-        this.isSatisfied = isSatisfied;
+    public RuleCheckResult(List<OrderUnit> matched, List<OrderUnit> unmatched) {
         this.matched.addAll(matched);
         this.unmatched.addAll(unmatched);
     }
 
     public boolean isSatisfied() {
-        return isSatisfied;
+        return this.matched.size() > 0;
     }
 
     public List<OrderUnit> getMatched() {
@@ -27,4 +25,5 @@ public class RuleCheckResult {
         return unmatched;
     }
 }
+
 
