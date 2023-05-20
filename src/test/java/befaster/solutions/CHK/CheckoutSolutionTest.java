@@ -170,4 +170,19 @@ class CheckoutSolutionTest {
 
         solution.assignOffers(units);
     }
+
+
+    /*
+        If we have the following order SSTX we should end up having the following units:
+        S = 20
+        STX = 45
+
+        Steps:
+            - S(2), T(1), X(1)
+            - S(1) STX(3)
+
+    */
+    public void shouldApplyBundleOffers() {
+
+    }
 }

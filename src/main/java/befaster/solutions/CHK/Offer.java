@@ -114,8 +114,19 @@ class Offer {
             }
         }
 
-        for (OrderUnit unit : acc) {
 
+        int currentQuantity = 0;
+        String unitName = "";
+        while (currentQuantity < expectedQuantity) {
+            for (OrderUnit unit : acc) {
+                currentQuantity ++;
+                unitName+=unit.getSku();
+
+                OrderUnit orderUnit = unit.subtract(1);
+                if (orderUnit.getQuantity() > 0) {
+                    remaining.add(orderUnit);
+                }
+            }
         }
 
         return null;

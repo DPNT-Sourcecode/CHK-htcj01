@@ -127,4 +127,8 @@ class OrderUnit {
         }
         return false;
     }
+
+    public OrderUnit subtract(int quantity){
+        return new OrderUnit(sku, this.quantity - quantity, price);
+    }
 }
