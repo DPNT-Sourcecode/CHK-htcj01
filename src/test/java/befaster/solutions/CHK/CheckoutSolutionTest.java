@@ -126,6 +126,10 @@ class CheckoutSolutionTest {
      - {"method":"checkout","params":["UUU"],"id":"CHK_R4_054"}, expected: 120, got: 80
      - {"method":"checkout","params":["UUUUU"],"id":"CHK_R4_056"}, expected: 160, got: 200
      - {"method":"checkout","params":["UUUUUUUU"],"id":"CHK_R4_057"}, expected: 240, got: 280
+
+     - {"method":"checkout","params":["NNN"],"id":"CHK_R4_105"}, expected: 120, got: 40
+     - {"method":"checkout","params":["NNNM"],"id":"CHK_R4_106"}, expected: 120, got: 40
+     - {"method":"checkout","params":["NNNNM"],"id":"CHK_R4_107"}, expected: 160, got: 80
      */
     @Test
     public void shouldApplyOffers() {
@@ -136,14 +140,18 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(135, checkout.checkout("HHHHHHHHHHHHHHHH"));
 
         Assertions.assertEquals(15, checkout.checkout("M"));
-        Assertions.assertEquals(40, checkout.checkout("NNNM"));
+        Assertions.assertEquals(120, checkout.checkout("NNNM"));
 
         //UUU = 120
         Assertions.assertEquals(120, checkout.checkout("UUU"));
         //UUU (U) = 120 + U = 40 = 160
         Assertions.assertEquals(160, checkout.checkout("UUUUU"));
-//
+
         //UUU (U) = 120 + UUU (U) = 120 = 240
         Assertions.assertEquals(240, checkout.checkout("UUUUUUUU"));
+
+
+        Assertions.assertEquals(120, checkout.checkout("NNN"));
+        Assertions.assertEquals(120, checkout.checkout("NNN"));
     }
 }
