@@ -140,10 +140,10 @@ class CheckoutSolutionTest {
 
         //UUU = 120
         Assertions.assertEquals(120, checkout.checkout("UUU"));
-//        //UUU = 120 -> (U)
-//        Assertions.assertEquals(160, checkout.checkout("UUUUU"));
+        //UUU (U) = 120 + U = 40 = 160
+        Assertions.assertEquals(160, checkout.checkout("UUUUU"));
 //
-//        //UUU (U) UUU (U) = 240
-//        Assertions.assertEquals(240, checkout.checkout("UUUUUUUU"));
+        //UUU (U) = 120 + UUU (U) = 120 = 240
+        Assertions.assertEquals(240, checkout.checkout("UUUUUUUU"));
     }
 }
