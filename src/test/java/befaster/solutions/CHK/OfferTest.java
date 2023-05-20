@@ -31,7 +31,15 @@ class OfferTest {
 
         List<OrderUnit> units = result.getUnits();
         assertEquals(units.size(), 2);
-        assertEquals(units.stream().findFirst().get().getSku(), "ST");
-        assertEquals(units.stream().findFirst().get().getPrice(), 45);
+        assertEquals(units.get(0).getSku(), "ST");
+        assertEquals(units.get(0).getPrice(), 45);
+
+        assertEquals(units.get(1).getSku(), "X");
+        assertEquals(units.get(1).getPrice(), 17);
+    }
+
+    @Test
+    void extractMoreComplexBundleWithUnmatchedItems() {
+
     }
 }

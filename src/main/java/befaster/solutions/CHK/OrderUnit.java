@@ -131,4 +131,16 @@ class OrderUnit {
     public OrderUnit subtract(int quantity){
         return new OrderUnit(sku, this.quantity - quantity, price);
     }
+
+    @Override
+    public String toString() {
+        return "OrderUnit{" +
+                "sku='" + sku + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", matchedOffer=" + matchedOffer +
+                ", offerCandidates=" + offerCandidates +
+                ", discounts=" + discounts +
+                '}';
+    }
 }
