@@ -121,7 +121,8 @@ class Offer {
                     Here, if the sum is higher, we should subtract the current unit by the difference
                     add the subtract in the acc and the remaining in the remaining.
                  */
-                int diff = (counter + unit.getQuantity()) - expectedQuantity;
+//                int diff = (counter + unit.getQuantity()) - expectedQuantity;
+                int diff = expectedQuantity - counter;
                 OrderUnit extracted = unit.extract(diff);
                 acc.add(extracted);
                 remaining.add(unit);
@@ -168,4 +169,5 @@ class Offer {
         }
     }
 }
+
 
