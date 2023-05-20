@@ -1,6 +1,6 @@
 package befaster.solutions.CHK;
 
-public class OfferRule {
+public class OfferRule implements IOfferRule {
     private final String sku;
     private final Integer quantity;
 
@@ -9,10 +9,12 @@ public class OfferRule {
         this.quantity = quantity;
     }
 
+    @Override
     public Integer getQuantity() {
         return quantity;
     }
 
+    @Override
     public String getSku() {
         return sku;
     }
@@ -25,7 +27,8 @@ public class OfferRule {
      * @param unit
      * @return
      */
-    Boolean isSatisfiedBy(OrderUnit unit) {
+    @Override
+    public Boolean isSatisfiedBy(OrderUnit unit) {
         return unit.getQuantity() >= quantity;
     }
 }

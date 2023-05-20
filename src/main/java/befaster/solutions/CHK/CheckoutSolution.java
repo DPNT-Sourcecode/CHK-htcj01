@@ -59,13 +59,12 @@ public class CheckoutSolution {
         prices.put("U", 40); prices.put("V", 50); prices.put("W", 20);
         prices.put("X", 90); prices.put("Y", 10); prices.put("Z", 50);
 
+        //Common Offers
         offers.add(new Offer("A", new OfferRule("A", 3), 130, null));
         offers.add(new Offer("A", new OfferRule("A", 5), 200, null));
         offers.add(new Offer("B", new OfferRule("B", 2), 45, null));
         offers.add(new Offer("E", new OfferRule("E", 2), 80, createDiscountToSku("B")));
         offers.add(new Offer("F", new OfferRule("F", 3), BUY_SOME_GET_X_FREE, null));
-
-        //New Offers
         offers.add(new Offer("H", new OfferRule("H", 5), 45, null));
         offers.add(new Offer("H", new OfferRule("H", 10), 80, null));
         offers.add(new Offer("K", new OfferRule("K", 2), 150, null));
@@ -76,6 +75,8 @@ public class CheckoutSolution {
         offers.add(new Offer("U", new OfferRule("U", 4), BUY_SOME_GET_X_FREE, null));
         offers.add(new Offer("V", new OfferRule("V", 2),  90, null));
         offers.add(new Offer("V", new OfferRule("V", 3),  130, null));
+
+        //Group Discount Offer
 
     }
 
