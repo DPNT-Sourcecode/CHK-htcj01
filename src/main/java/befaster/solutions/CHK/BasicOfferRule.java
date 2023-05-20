@@ -1,5 +1,8 @@
 package befaster.solutions.CHK;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public record BasicOfferRule(String sku, Integer quantity) implements IOfferRule {
     @Override
     public Boolean isSatisfiedBy(OrderUnit unit) {
@@ -7,7 +10,5 @@ public record BasicOfferRule(String sku, Integer quantity) implements IOfferRule
     }
 }
 
-public record GroupOfferRule() implements  IOfferRule {
 
-}
 
