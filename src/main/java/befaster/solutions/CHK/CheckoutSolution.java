@@ -77,7 +77,7 @@ public class CheckoutSolution {
         offers.add(new Offer("V", new BasicOfferRule("V", 3),  130, null));
 
         //Group Discount Offer
-
+        offers.add(new Offer("STXYZ", new GroupOfferRule(3, "S", "T", "X", "Y", "Z"),  45, null));
     }
 
     public Integer checkout(String skus) {
@@ -114,13 +114,18 @@ public class CheckoutSolution {
         return orderUnits;
     }
 
-    private void assignOffers(Map<String, OrderUnit>  units){
+    public void assignOffers(Map<String, OrderUnit>  units){
         List<Discount> discounts = new ArrayList<>();
         offers.forEach(offer -> {
-            OrderUnit unit = units.get(offer.getSku());
-            if (unit != null && offer.isSatisfiedBy(unit)) {
-                unit.setMatchedOffer(offer);
-                discounts.addAll(offer.computeDiscounts(new OfferContext(unit, offer)));
+            if (offer.isGroupOffer()){
+                OrderUnit bundle = offer.extractBundle(new ArrayList<>(units.values()));
+                units.put(offer.getSku(), bundle);
+            } else {
+                OrderUnit unit = units.get(offer.getSku());
+                if (unit != null && offer.isSatisfiedBy(unit)) {
+                    unit.setMatchedOffer(offer);
+                    discounts.addAll(offer.computeDiscounts(new OfferContext(unit, offer)));
+                }
             }
         });
 
@@ -130,4 +135,3 @@ public class CheckoutSolution {
         });
     }
 }
-

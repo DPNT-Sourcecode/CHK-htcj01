@@ -23,9 +23,17 @@ public class GroupOfferRule implements IOfferRule {
         return null;
     }
 
+    public List<String> getSkus() {
+        return skus;
+    }
+
     @Override
     public Boolean isSatisfiedBy(OrderUnit unit) {
-        return null;
+        return isSatisfiedBy(List.of(unit));
+    }
+
+    @Override
+    public Boolean isSatisfiedBy(List<OrderUnit> units) {
+        return units.stream().filter(skus::contains).mapToInt(OrderUnit::getQuantity).sum() >= quantity;
     }
 }
-

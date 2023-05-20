@@ -1,9 +1,12 @@
 package befaster.solutions.CHK;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class CheckoutSolutionTest {
 
@@ -154,5 +157,17 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(120, checkout.checkout("NNN"));
         Assertions.assertEquals(120, checkout.checkout("NNNM"));
         Assertions.assertEquals(160, checkout.checkout("NNNNM"));
+    }
+
+    @Test
+    public void shouldAssignOffers() {
+        CheckoutSolution solution = new CheckoutSolution();
+        Map<String, OrderUnit> units = new HashMap<>();
+
+        units.put("S", new OrderUnit("S", 1, 20));
+        units.put("T", new OrderUnit("T", 1, 20));
+        units.put("X", new OrderUnit("X", 1, 17));
+
+        solution.assignOffers(units);
     }
 }
