@@ -186,5 +186,14 @@ class CheckoutSolutionTest {
     public void shouldApplyBundleOffers() {
         CheckoutSolution checkout = new CheckoutSolution();
         Assertions.assertEquals(45, checkout.checkout("STX"));
+
+        //TODO: If there is a problem with the discount I can sort the items by the lowest price.
+        Assertions.assertEquals(45, checkout.checkout("XXX"));
+        Assertions.assertEquals(45, checkout.checkout("XST"));
+        Assertions.assertEquals(45, checkout.checkout("XSS"));
+        Assertions.assertEquals(62, checkout.checkout("XSST"));
+        Assertions.assertEquals(62, checkout.checkout("SSTX"));
+        Assertions.assertEquals(112, checkout.checkout("SSTXA"));
+        Assertions.assertEquals(112, checkout.checkout("ASSTX"));
     }
 }
