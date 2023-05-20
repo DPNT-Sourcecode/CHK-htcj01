@@ -119,12 +119,25 @@ class Offer {
         String unitName = "";
         while (currentQuantity < expectedQuantity) {
             for (OrderUnit unit : acc) {
-                currentQuantity ++;
-                unitName+=unit.getSku();
-
-                OrderUnit orderUnit = unit.subtract(1);
-                if (orderUnit.getQuantity() > 0) {
-                    remaining.add(orderUnit);
+                if (currentQuantity == expectedQuantity) {
+                    continue;
+                }
+                int diffToComplete = expectedQuantity - currentQuantity;
+                if (diffToComplete >= unit.getQuantity()) {
+                    unitName+=unit.getSku();
+                    currentQuantity += unit.getQuantity();
+                    OrderUnit orderUnit = unit.subtract(unit.getQuantity());
+                    if (orderUnit.getQuantity() > 0) {
+                        remaining.add(orderUnit);
+                    }
+                } else {
+                    unitName+=unit.getSku();
+                    int quantityToMove = unit.getQuantity() - diffToComplete;
+                    currentQuantity += quantityToMove;
+                    OrderUnit orderUnit = unit.subtract(quantityToMove);
+                    if (orderUnit.getQuantity() > 0) {
+                        remaining.add(orderUnit);
+                    }
                 }
             }
         }
@@ -141,3 +154,4 @@ class Offer {
         }
     }
 }
+
