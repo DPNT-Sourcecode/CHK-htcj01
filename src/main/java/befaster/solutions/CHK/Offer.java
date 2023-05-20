@@ -101,8 +101,9 @@ class Offer {
     /*
         Should:
             - Iterate over matched units
-              - accumulate the quantity from the matched up to be 
-     */
+              - accumulate the quantity from the matched up to be higher than the expected quantity.
+                - When is higher, subtract the quantity from the acc and run the same method with the remaining.
+    */
     private AffectedOrderUnitsResult computeAffectedOrderUnits(List<OrderUnit> units, RuleCheckResult checkResult){
         List<OrderUnit> matched = checkResult.getMatched();
         List<OrderUnit> acc = new ArrayList<>();
@@ -116,6 +117,12 @@ class Offer {
                 counter += unit.getQuantity();
             }
         }
+
+        for (OrderUnit unit : acc) {
+
+        }
+
+        return null;
     }
 
     static class AffectedOrderUnitsResult {
@@ -128,3 +135,4 @@ class Offer {
         }
     }
 }
+
