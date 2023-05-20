@@ -86,8 +86,8 @@ public class CheckoutSolution {
         List<String> skusList = List.of(skus.split(""));
         if (!isAllSkuValid(skusList)) return -1;
         Map<String, OrderUnit>  orderUnits = parseSKUs(skusList);
-        assignOffers(orderUnits);
-        return orderUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
+        Map<String, OrderUnit> processedUnits = assignOffers(orderUnits);
+        return processedUnits.values().stream().mapToInt(OrderUnit::getTotal).sum();
     }
 
     private boolean isAllSkuValid(List<String> skusList) {
@@ -114,11 +114,14 @@ public class CheckoutSolution {
         return orderUnits;
     }
 
-    public void assignOffers(Map<String, OrderUnit>  units){
+    public Map<String, OrderUnit> assignOffers(Map<String, OrderUnit>  units){
         List<Discount> discounts = new ArrayList<>();
         offers.forEach(offer -> {
             if (offer.isGroupOffer()){
-                OrderUnit bundle = offer.extractBundle(new ArrayList<>(units.values()));
+                OfferBundleResult bundle = offer.extractBundle(new ArrayList<>(units.values()));
+
+                //Note: We can internally change each OrderUnit quantity, but the best is to let it Immutable.
+                //So, we should return a new Map instead of change it.
                 units.put(offer.getSku(), bundle);
             } else {
                 OrderUnit unit = units.get(offer.getSku());
@@ -135,3 +138,4 @@ public class CheckoutSolution {
         });
     }
 }
+
