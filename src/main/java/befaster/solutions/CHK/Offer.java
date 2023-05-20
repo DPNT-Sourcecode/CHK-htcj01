@@ -68,8 +68,23 @@ class Offer {
         return this.rule.isSatisfiedBy(unit);
     }
 
+    /**
+     *
+     * @param units
+     * @return
+     */
+    //TODO: Should return a list because it can be applied to multiple combinations.
+    //What about return discounts? The discounts can be applied in the end
+    //Anyway we need to return the Order units with their sizes changed.
     public OrderUnit extractBundle(List<OrderUnit> units) {
+        /*
+        Steps:
+            - Iterate over the units until don't be satisfied (recursively)
+              - When a discount is applied we should subtract the size and run it again
+            - Return a list of units covering the combination of items to apply the offer (Maybe return discounts?)
+         */
         GroupOfferRule offerRule = (GroupOfferRule) this.rule;
+        offerRule.isSatisfiedBy(units);
         List<OrderUnit> orderUnits = units.stream().filter(unit -> this.rule.isSatisfiedBy(unit)).collect(Collectors.toList());
         String name = orderUnits.stream().map(OrderUnit::getSku).collect(Collectors.joining());
         //TODO: WIP
