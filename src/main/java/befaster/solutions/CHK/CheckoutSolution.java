@@ -26,6 +26,7 @@ public class CheckoutSolution {
             Offer offer = ctx.offer();
             OrderUnit unit = ctx.unit();
             int remaining = unit.getQuantity() % offer.getQuantity() -1;
+            if (remaining < 0) remaining = 0;
             int timesToApply = unit.getQuantity() / offer.getQuantity();
             int total = unit.getQuantity() * unit.getPrice();
             int discount = timesToApply * unit.getPrice();
