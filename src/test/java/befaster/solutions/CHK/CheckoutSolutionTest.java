@@ -152,6 +152,7 @@ class CheckoutSolutionTest {
 
 
         Assertions.assertEquals(120, checkout.checkout("NNN"));
-        Assertions.assertEquals(120, checkout.checkout("NNN"));
+        Assertions.assertEquals(120, checkout.checkout("NNNM"));
+        Assertions.assertEquals(160, checkout.checkout("NNNNM"));
     }
 }
