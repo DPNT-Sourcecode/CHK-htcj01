@@ -50,9 +50,9 @@ public class CheckoutSolution {
 
     static {
         prices.put("A", 50); prices.put("B", 30); prices.put("C", 20);
-        prices.put("D", 15); prices.put("E", 40); prices.put("F", 10);
+        prices.put("D", 15); prices.put("E", 40);
         prices.put("F", 10); prices.put("G", 20); prices.put("H", 10);
-        prices.put("I", 35); prices.put("J", 60); prices.put("K", 80);
+        prices.put("I", 35); prices.put("J", 60); prices.put("K", 70);
         prices.put("L", 90); prices.put("M", 15); prices.put("N", 40);
         prices.put("O", 10); prices.put("P", 50); prices.put("Q", 30);
         prices.put("R", 50); prices.put("S", 20); prices.put("T", 20);
@@ -140,3 +140,4 @@ public class CheckoutSolution {
         return result;
     }
 }
+

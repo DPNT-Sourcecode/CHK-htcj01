@@ -184,6 +184,11 @@ class CheckoutSolutionTest {
     */
     @Test
     public void shouldApplyBundleOffers() {
+        /*
+         - {"method":"checkout","params":["K"],"id":"CHK_R5_013"}, expected: 70, got: 80
+         - {"method":"checkout","params":["ABCDEFGHIJKLMNOPQRSTUVW"],"id":"CHK_R5_033"}, expected: 795, got: 805
+         - {"method":"checkout","params":["K"],"id":"CHK_R5_095"}, expected: 70, got: 80
+         */
         CheckoutSolution checkout = new CheckoutSolution();
         Assertions.assertEquals(45, checkout.checkout("STX"));
 
