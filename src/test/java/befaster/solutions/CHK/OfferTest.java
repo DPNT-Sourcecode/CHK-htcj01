@@ -15,5 +15,10 @@ class OfferTest {
 
         Map<String, OrderUnit> unitMap = CheckoutSolution.parseSKUs(List.of("S", "T", "X"));
         OfferBundleResult result = offer.extractBundle(unitMap.values().stream().toList());
+
+        List<OrderUnit> units = result.getUnits();
+        assertEquals(units.size(), 1);
+        assertEquals(units.stream().findFirst().get().getSku(), "STX");
+        assertEquals(units.stream().findFirst().get().getPrice(), 45);
     }
 }

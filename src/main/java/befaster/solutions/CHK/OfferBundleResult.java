@@ -28,4 +28,6 @@ public class OfferBundleResult {
         this.discounts.addAll(other.discounts);
         this.units.addAll(other.units);
     }
+
+
 }
