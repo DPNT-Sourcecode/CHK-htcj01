@@ -9,7 +9,7 @@ import java.util.List;
  */
 class OrderUnit {
     private final String sku;
-    private final Integer quantity;
+    private Integer quantity;
 
     private final Integer price;
 
@@ -128,6 +128,16 @@ class OrderUnit {
         return false;
     }
 
+    /**
+     * Returns a new OrderUnit and change the state of the current OrderUnit
+     * @param quantity
+     * @return a copy of this OrderUnit with the requested quantity
+     */
+    public OrderUnit extract(int quantity){
+        this.quantity = this.quantity - quantity ;
+        return new OrderUnit(sku, quantity, price);
+    }
+
     public OrderUnit subtract(int quantity){
         return new OrderUnit(sku, this.quantity - quantity, price);
     }
@@ -144,3 +154,4 @@ class OrderUnit {
                 '}';
     }
 }
+
