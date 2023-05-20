@@ -23,4 +23,10 @@ public class OfferBundleResult {
     public List<OrderUnit> getUnits() {
         return units;
     }
+
+    public void merge(OfferBundleResult other){
+        this.discounts.addAll(other.discounts);
+        this.units.addAll(other.units);
+    }
 }
+

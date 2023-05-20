@@ -77,6 +77,7 @@ class Offer {
     //What about return discounts? The discounts can be applied in the end
     //Anyway we need to return the Order units with their sizes changed.
     public OfferBundleResult extractBundle(List<OrderUnit> units) {
+        OfferBundleResult response = new OfferBundleResult();
         /*
         Steps:
             - Iterate over the units until don't be satisfied (recursively)
@@ -87,15 +88,10 @@ class Offer {
         RuleCheckResult checkResult = offerRule.isSatisfiedBy(units);
         if (checkResult.isSatisfied()) {
             //Should subtract the original units and extractBundles again
-            List<OrderUnit> remainingUnits = null;
-            extractBundle(remainingUnits);
+            AffectedOrderUnitsResult result = computeAffectedOrderUnits(checkResult.getMatched(), checkResult);
+            response.merge(extractBundle(result.remaining));
         }
-
-
-        List<OrderUnit> orderUnits = units.stream().filter(unit -> this.rule.isSatisfiedBy(unit)).collect(Collectors.toList());
-        String name = orderUnits.stream().map(OrderUnit::getSku).collect(Collectors.joining());
-        //TODO: WIP
-        return null;
+        return response;
     }
 
     /*
@@ -135,4 +131,5 @@ class Offer {
         }
     }
 }
+
 
