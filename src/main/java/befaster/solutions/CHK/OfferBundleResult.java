@@ -12,6 +12,10 @@ public class OfferBundleResult {
         this.units.add(unit);
     }
 
+    public void add(List<OrderUnit> units){
+        this.units.addAll(units);
+    }
+
     public void add(Discount discount) {
         this.discounts.add(discount);
     }
@@ -31,3 +35,4 @@ public class OfferBundleResult {
 
 
 }
+

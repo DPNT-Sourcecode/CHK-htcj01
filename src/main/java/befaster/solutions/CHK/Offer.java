@@ -90,6 +90,7 @@ class Offer {
             //Should subtract the original units and extractBundles again
             AffectedOrderUnitsResult result = computeAffectedOrderUnits(checkResult.getMatched(), checkResult);
             response.add(result.unit);
+//            response.add(checkResult.getUnmatched());
             response.merge(extractBundle(result.remaining));
         }
         return response;
@@ -154,4 +155,5 @@ class Offer {
         }
     }
 }
+
 
