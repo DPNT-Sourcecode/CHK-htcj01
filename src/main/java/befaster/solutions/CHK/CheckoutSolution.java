@@ -73,7 +73,7 @@ public class CheckoutSolution {
         offers.add(new Offer("P", new OfferRule("P", 5), 200, null));
         offers.add(new Offer("Q", new OfferRule("Q", 3), 80, null));
         offers.add(new Offer("R", new OfferRule("R", 3), 150, createDiscountToSku("Q")));
-        offers.add(new Offer("U", new OfferRule("U", 3), BUY_SOME_GET_X_FREE, null));
+        offers.add(new Offer("U", new OfferRule("U", 4), BUY_SOME_GET_X_FREE, null));
         offers.add(new Offer("V", new OfferRule("V", 2),  90, null));
         offers.add(new Offer("V", new OfferRule("V", 3),  130, null));
 
