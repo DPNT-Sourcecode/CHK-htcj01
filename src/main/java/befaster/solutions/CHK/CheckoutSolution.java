@@ -116,13 +116,14 @@ public class CheckoutSolution {
 
     public Map<String, OrderUnit> assignOffers(Map<String, OrderUnit>  units){
         List<Discount> discounts = new ArrayList<>();
-        offers.forEach(offer -> {
+        Map<String, OrderUnit> result = units;
+        for (Offer offer : offers) {
             if (offer.isGroupOffer()){
-                OfferBundleResult bundle = offer.extractBundle(new ArrayList<>(units.values()));
-
-                //Note: We can internally change each OrderUnit quantity, but the best is to let it Immutable.
-                //So, we should return a new Map instead of change it.
-                units.put(offer.getSku(), bundle);
+//                OfferBundleResult bundle = offer.extractBundle(new ArrayList<>(units.values()));
+//                List<OrderUnit> bundleUnits = bundle.getUnits();
+//                //Note: We can internally change each OrderUnit quantity, but the best is to let it Immutable.
+//                //So, we should return a new Map instead of change it.
+//                result = bundleUnits.stream().collect(Collectors.toMap(OrderUnit::getSku, (item) -> item));
             } else {
                 OrderUnit unit = units.get(offer.getSku());
                 if (unit != null && offer.isSatisfiedBy(unit)) {
@@ -130,12 +131,14 @@ public class CheckoutSolution {
                     discounts.addAll(offer.computeDiscounts(new OfferContext(unit, offer)));
                 }
             }
-        });
+        }
 
         discounts.forEach(discount -> {
             OrderUnit unit = units.get(discount.getSku());
             if (unit != null) unit.addDiscount(discount);
         });
+        return result;
     }
 }
+
 
