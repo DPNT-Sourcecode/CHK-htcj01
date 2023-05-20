@@ -45,8 +45,12 @@ public class GroupOfferRule implements IOfferRule {
                 unmatched.add(unit);
             }
         });
-        return new RuleCheckResult(matched, unmatched);
+
+        Integer totalMatched = matched.stream().mapToInt(OrderUnit::getQuantity).sum();
+
+        return new RuleCheckResult(totalMatched >= this.quantity, matched, unmatched);
     }
 }
+
 
 
