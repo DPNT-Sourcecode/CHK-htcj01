@@ -16,7 +16,7 @@ public class GroupOfferRule implements IOfferRule {
 
     @Override
     public Integer quantity() {
-        return null;
+        return this.quantity;
     }
 
     @Override

@@ -108,7 +108,7 @@ class Offer {
         Integer counter = 0;
         Integer expectedQuantity = this.rule.quantity();
         for (OrderUnit unit: matched) {
-            if (counter + unit.getQuantity() < expectedQuantity){
+            if (counter + unit.getQuantity() <= expectedQuantity){
                 acc.add(unit);
                 counter += unit.getQuantity();
             }
@@ -131,5 +131,3 @@ class Offer {
         }
     }
 }
-
-

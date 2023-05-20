@@ -29,4 +29,3 @@ public class OfferBundleResult {
         this.units.addAll(other.units);
     }
 }
-
