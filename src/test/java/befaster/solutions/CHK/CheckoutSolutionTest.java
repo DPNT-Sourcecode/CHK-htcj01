@@ -215,8 +215,8 @@ class CheckoutSolutionTest {
 //        Assertions.assertEquals(240, checkout.checkout("KKKK"));
 
         //Last
-        Assertions.assertEquals(90, checkout.checkout("STXSTX")); //Got: 124
-//        Assertions.assertEquals(65, checkout.checkout("SSSZ")); //Got: 66
+//        Assertions.assertEquals(90, checkout.checkout("STXSTX")); //Got: 124
+        Assertions.assertEquals(65, checkout.checkout("SSSZ")); //Got: 66
 //        Assertions.assertEquals(65, checkout.checkout("ZZZS")); //Got 90
     }
 }

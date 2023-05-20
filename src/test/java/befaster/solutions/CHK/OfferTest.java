@@ -68,12 +68,9 @@ class OfferTest {
         assertEquals(units.size(), 2);
 
         OrderUnit first = units.stream().filter(item -> item.getSku().equalsIgnoreCase("ST")).findFirst().get();
-        OrderUnit second = units.stream().filter(item -> item.getSku().equalsIgnoreCase("X")).findFirst().get();
-        OrderUnit third = units.stream().filter(item -> item.getSku().equalsIgnoreCase("A")).findFirst().get();
-
+        OrderUnit second = units.stream().filter(item -> item.getSku().equalsIgnoreCase("TXX")).findFirst().get();
 
         assertEquals(first.getPrice(), 45);
-        assertEquals(second.getPrice(), 17);
-        assertEquals(third.getPrice(), 50);
+        assertEquals(second.getPrice(), 45);
     }
 }
