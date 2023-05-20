@@ -14,6 +14,6 @@ class OfferTest {
         Offer offer = new Offer("STXYZ", new GroupOfferRule(3, "S", "T", "X", "Y", "Z"),  45, null);
 
         Map<String, OrderUnit> unitMap = CheckoutSolution.parseSKUs(List.of("S", "T", "X"));
-        OrderUnit bundle = offer.extractBundle(unitMap.values().stream().toList());
+        OfferBundleResult result = offer.extractBundle(unitMap.values().stream().toList());
     }
 }

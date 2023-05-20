@@ -97,4 +97,34 @@ class Offer {
         //TODO: WIP
         return null;
     }
+
+    /*
+        Should:
+            - Iterate over matched units
+              - accumulate the quantity from the matched up to be 
+     */
+    private AffectedOrderUnitsResult computeAffectedOrderUnits(List<OrderUnit> units, RuleCheckResult checkResult){
+        List<OrderUnit> matched = checkResult.getMatched();
+        List<OrderUnit> acc = new ArrayList<>();
+        List<OrderUnit> bundles = new ArrayList<>();
+        List<OrderUnit> remaining = new ArrayList<>();
+        Integer counter = 0;
+        Integer expectedQuantity = this.rule.quantity();
+        for (OrderUnit unit: matched) {
+            if (counter + unit.getQuantity() < expectedQuantity){
+                acc.add(unit);
+                counter += unit.getQuantity();
+            }
+        }
+    }
+
+    static class AffectedOrderUnitsResult {
+        private List<OrderUnit> units;
+        private List<OrderUnit> remaining;
+
+        public AffectedOrderUnitsResult(List<OrderUnit> units, List<OrderUnit> remaining) {
+            this.units = units;
+            this.remaining = remaining;
+        }
+    }
 }
