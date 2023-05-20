@@ -56,4 +56,23 @@ class OfferTest {
         assertEquals(second.getPrice(), 17);
         assertEquals(third.getPrice(), 50);
     }
+
+    @Test
+    void extractDoubleBundle() {
+        Offer offer = new Offer("STXYZ", new GroupOfferRule(3, "S", "T", "X", "Y", "Z"),  45, null);
+
+        Map<String, OrderUnit> unitMap = CheckoutSolution.parseSKUs(List.of("S","T", "X", "S","T", "X"));
+        OfferBundleResult result = offer.extractBundle(unitMap.values().stream().toList());
+
+        List<OrderUnit> units = result.getUnits();
+
+        OrderUnit first = units.stream().filter(item -> item.getSku().equalsIgnoreCase("ST")).findFirst().get();
+        OrderUnit second = units.stream().filter(item -> item.getSku().equalsIgnoreCase("X")).findFirst().get();
+        OrderUnit third = units.stream().filter(item -> item.getSku().equalsIgnoreCase("A")).findFirst().get();
+
+        assertEquals(units.size(), 3);
+        assertEquals(first.getPrice(), 45);
+        assertEquals(second.getPrice(), 17);
+        assertEquals(third.getPrice(), 50);
+    }
 }
