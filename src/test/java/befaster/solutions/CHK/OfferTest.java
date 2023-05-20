@@ -40,6 +40,17 @@ class OfferTest {
 
     @Test
     void extractMoreComplexBundleWithUnmatchedItems() {
+        Offer offer = new Offer("STXYZ", new GroupOfferRule(3, "S", "T", "X", "Y", "Z"),  45, null);
 
+        Map<String, OrderUnit> unitMap = CheckoutSolution.parseSKUs(List.of("S","S", "T", "X", "A"));
+        OfferBundleResult result = offer.extractBundle(unitMap.values().stream().toList());
+
+        List<OrderUnit> units = result.getUnits();
+        assertEquals(units.size(), 2);
+        assertEquals(units.get(0).getSku(), "ST");
+        assertEquals(units.get(0).getPrice(), 45);
+
+        assertEquals(units.get(1).getSku(), "X");
+        assertEquals(units.get(1).getPrice(), 17);
     }
 }
