@@ -92,6 +92,8 @@ class Offer {
             response.add(result.unit);
 //            response.add(checkResult.getUnmatched());
             response.merge(extractBundle(result.remaining));
+        } else {
+            response.add(units);
         }
         return response;
     }
@@ -157,5 +159,6 @@ class Offer {
         }
     }
 }
+
 
 
